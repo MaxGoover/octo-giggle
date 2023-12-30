@@ -1,6 +1,6 @@
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
-import { Quasar } from "quasar";
+import { Notify, Quasar } from "quasar";
 
 // Import icon libraries
 import "@quasar/extras/roboto-font/roboto-font.css";
@@ -19,7 +19,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(Quasar, {
-                plugins: {},
+                plugins: { Notify },
             })
             .mount(el);
     },

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,6 +15,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia('Home');
-});
+// Route::get('/', function () {
+//     return Inertia('Todo'); // название в скобках должно совпадать с названием компонента.vue, к которому он обращается
+// });
+
+Route::resource('todos', TodoController::class);
