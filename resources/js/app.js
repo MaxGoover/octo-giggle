@@ -12,8 +12,8 @@ import "quasar/src/css/index.sass";
 
 createInertiaApp({
     resolve: (name) => {
-        const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
-        return pages[`./Pages/${name}.vue`];
+        const pages = import.meta.glob("./src/**/*.vue", { eager: true });
+        return pages[`./src/${name}.vue`];
     },
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })

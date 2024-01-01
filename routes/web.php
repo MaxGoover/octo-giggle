@@ -15,8 +15,8 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia('Todo'); // название в скобках должно совпадать с названием компонента.vue, к которому он обращается
-// });
+Route::get('/', function () {
+    return Inertia('ExpenseTracker/App'); // название в скобках должно совпадать с названием компонента.vue, к которому он обращается
+});
 
 Route::resource('todos', TodoController::class);
