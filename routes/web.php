@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+// use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia('ExpenseTracker/App'); // название в скобках должно совпадать с названием компонента.vue, к которому он обращается
-});
+// Route::get('/', function () {
+//     return Inertia('Todo/Todo'); // название в скобках должно совпадать с названием компонента.vue, к которому он обращается
+// });
+
+// Route::group(['namespace' => 'auth'], function () {
+//     Route::get('sign-in', 'AuthController');
+// });
 
 Route::resource('todos', TodoController::class);

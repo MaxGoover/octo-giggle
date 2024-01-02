@@ -13,7 +13,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Todo', [
+        return Inertia::render('Todo/Todo', [
             'todos' => Todo::orderBy('completed', 'asc')->get(),
         ]);
     }

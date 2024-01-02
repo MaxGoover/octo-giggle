@@ -13,6 +13,7 @@
 /storage/*.key
 /vendor
 auth.json
+composer.lock
 Homestead.json
 Homestead.yaml
 npm-debug.log
