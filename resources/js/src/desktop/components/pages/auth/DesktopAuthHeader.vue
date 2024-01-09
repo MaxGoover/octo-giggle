@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import ComponentIcon from 'src/common/ComponentIcon'
-import IconLogo2 from 'assets/icons/IconLogo2'
+import ComponentIcon from '@/components/ComponentIcon.vue'
+import IconLogo2 from '@/assets/icons/IconLogo2.vue'
 
 export default {
   name: 'DesktopAuthHeader',
@@ -37,9 +37,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import 'src/css/common/colors'
+// @import '@/css/common/colors'
+//   background-color: $main-theme-bg
 .auth-header
-  background-color: $main-theme-bg
   display: flex
   flex-wrap: wrap
   justify-content: space-between
@@ -50,7 +50,7 @@ export default {
   margin-top: 3vh
 
   &-text
-    color: $accent-font
+    // color: $accent-font
 
     &__primary
       font-size: 36px
