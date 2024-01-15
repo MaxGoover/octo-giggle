@@ -1,0 +1,33 @@
+@startuml Architecture
+
+title Варианты использования системы (верхнеуровневые)
+
+' actor "Пользователь" as User
+' actor "Работник" as Worker
+' actor "Оператор" as Operator
+
+' usecase "Регистрация пользователя" as Registration
+' usecase "Редактирование профиля пользователя" as EditProfile
+
+' Guest -> Registration
+' Registration ..> EditProfile : include
+
+' actor "Expert" as Expert
+
+' Expert -left-|> User
+' User -> EditProfile
+
+' usecase "Создать план участка" as CreatePlan
+' User -> CreatePlan
+' (Указать базовый план) .up.> CreatePlan : extends
+
+' User -> (Изменить план своего участка)
+' User -> (Участвовать в консультации)
+' Expert -> (Участвовать в консультации)
+' Expert -> (Согласиться на консультацию)
+
+' actor "Интернет магазин" as InternetStore
+' User -> (Получить рекомендации)
+' InternetStore -up-> (Получить рекомендации)
+
+@enduml
