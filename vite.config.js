@@ -5,6 +5,15 @@ import laravel from 'laravel-vite-plugin'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      sass: {
+        additionalData: `
+          @import "./resources/js/src/css/app.sass"
+        `,
+      },
+    },
+  },
   plugins: [
     // порядок важен
     laravel({

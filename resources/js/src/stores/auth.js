@@ -1,15 +1,14 @@
-import { axios } from 'src/boot/axios'
 import { defineStore } from 'pinia'
-import { TimerCountdown } from 'src/entities/auth/TimerCountdown'
-import $AUTH from 'src/utils/consts/auth'
-import $config from 'src/utils/settings/config'
+import { TimerCountdown } from '@/entities/auth/TimerCountdown'
+import $AUTH from '@/utils/consts/auth'
+import $CONFIG from '@/utils/settings/config'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     // isShowedAuthLoader: false,
-    // authType: $AUTH.ENTER_BY_SMS,
-    // step: $AUTH.ENTER_BY_SMS,
-    // timer: new TimerCountdown($config.auth.timer.duration),
+    authType: $AUTH.ENTER_BY_SMS,
+    step: $AUTH.ENTER_BY_SMS,
+    timer: new TimerCountdown($CONFIG.auth.timer.duration),
   }),
 
   getters: {},
@@ -33,9 +32,9 @@ export const useAuthStore = defineStore('auth', {
     // hideAuthLoader() {
     //   this.isShowedAuthLoader = false
     // },
-    // setStep(step) {
-    //   this.step = step
-    // },
+    setStep(step) {
+      this.step = step
+    },
     // showAuthLoader() {
     //   this.isShowedAuthLoader = true
     // },

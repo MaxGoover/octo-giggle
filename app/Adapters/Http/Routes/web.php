@@ -23,4 +23,9 @@ use Illuminate\Support\Facades\Route;
 //     Route::get('sign-in', 'AuthController');
 // });
 
+Route::get('/auth', function () {
+    return Inertia('desktop/views/auth/DesktopPageAuth');
+    // return Inertia('Todo/Todo');
+});
+
 Route::resource('todos', TodoController::class);

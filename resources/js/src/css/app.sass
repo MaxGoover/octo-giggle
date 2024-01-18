@@ -1,0 +1,41 @@
+@import 'buttons'
+@import 'colors'
+@import 'fonts/lato'
+@import 'fonts/montserrat'
+
+body
+  font-family: Montserrat, sans-serif !important
+
+// цикл для размеров шрифтов (от 10рх до 40рх с разницей в 2рх)
+@for $i from 0 through 15
+  $size: 10 + $i * 2
+
+  .font-size-#{$size}
+    font-size: #{$size}px
+
+.font-lato
+  font-family: Lato, sans-serif
+
+// добавляем высоту по размерам (кратную 8-ми или хотя бы 4-м)
+.height-64
+  height: 64px
+
+// margin
+.margin-left-32
+  margin-left: 32px
+
+.margin-top-12
+  margin-top: 12px
+
+.margin-top-32
+  margin-top: 32px
+
+.text-decoration-none
+  text-decoration: none
+
+// добавляем насыщенность шрифта
+.text-weight-medium-bold
+  font-weight: 600
+
+.text-weight-thin-light
+  font-weight: 200

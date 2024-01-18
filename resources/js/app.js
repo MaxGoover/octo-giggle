@@ -15,9 +15,6 @@ const i18n = createI18n({
 import { createPinia } from 'pinia'
 const pinia = createPinia()
 
-// Import fonts
-import '@quasar/extras/roboto-font/roboto-font.css'
-
 // Import icon libraries
 import '@quasar/extras/material-icons/material-icons.css'
 import '@quasar/extras/mdi-v7/mdi-v7.css'
@@ -25,13 +22,19 @@ import '@quasar/extras/mdi-v7/mdi-v7.css'
 // Import Quasar css
 import 'quasar/src/css/index.sass'
 
+// Import constants
+import $AUTH from '@/utils/consts/auth'
+import $CONFIG from '@/utils/settings/config'
+import $ICONS from '@/utils/consts/icons'
+import $VALIDATION from '@/utils/settings/validation'
+
 createInertiaApp({
   resolve: (name) => {
     const pages = import.meta.glob('./src/**/*.vue', { eager: true })
     return pages[`./src/${name}.vue`]
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(Quasar, {
         config: {},
@@ -39,6 +42,12 @@ createInertiaApp({
       })
       .use(i18n)
       .use(pinia)
-      .mount(el)
+
+    // Define global variables
+    app.config.globalProperties.$AUTH = $AUTH;
+    app.config.globalProperties.$CONFIG = $CONFIG;
+    app.config.globalProperties.$ICONS = $ICONS;
+    app.config.globalProperties.$VALIDATION = $VALIDATION;
+    app.mount(el)
   },
 })
