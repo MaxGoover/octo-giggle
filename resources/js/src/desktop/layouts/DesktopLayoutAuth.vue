@@ -6,15 +6,7 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import DesktopAuthFooter from '@/desktop/components/layouts/auth/DesktopAuthFooter.vue'
 import DesktopAuthHeader from '@/desktop/components/layouts/auth/DesktopAuthHeader.vue'
-
-export default {
-  name: 'DesktopLayoutAuth',
-  components: {
-    DesktopAuthFooter,
-    DesktopAuthHeader,
-  },
-}
 </script>

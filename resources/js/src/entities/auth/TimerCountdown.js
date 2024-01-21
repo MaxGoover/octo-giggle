@@ -1,11 +1,11 @@
 import helpersDateTime from '@/utils/helpers/dateTime'
 
 class TimerCountdown {
-  // duration
-  // interval
-  // minutes
-  // remaining
-  // seconds
+  duration
+  interval
+  minutes
+  remaining
+  seconds
 
   constructor(duration) {
     this.duration = duration

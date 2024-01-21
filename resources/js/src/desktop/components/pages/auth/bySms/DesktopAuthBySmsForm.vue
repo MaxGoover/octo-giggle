@@ -12,7 +12,7 @@
       no-error-icon
       outlined
       type="tel"
-      :mask="$VALIDATION.phone.formatted.mask"
+      :mask="VALIDATION.phone.formatted.mask"
     />
 
     <!--Принятие соглашений-->
@@ -20,7 +20,7 @@
       <i18n-t keypath="auth.agreeConditions" tag="p" scope="global">
         <template #linkUserAgreement>
           <a
-            :href="$CONFIG.auth.link.userAgreement"
+            :href="CONFIG.auth.link.userAgreement"
             class="text-text-link text-decoration-none"
             target="_blank"
             >{{ $t('auth.doc.userAgreement') }}</a
@@ -28,7 +28,7 @@
         </template>
         <template #linkPrivacyPolicy>
           <a
-            :href="$CONFIG.auth.link.privacyPolicy"
+            :href="CONFIG.auth.link.privacyPolicy"
             class="text-text-link text-decoration-none"
             target="_blank"
             >{{ $t('auth.doc.privacyPolicy') }}</a
@@ -38,10 +38,10 @@
     </div>
 
     <!--Получить код-->
-    <div class="col-12 margin-top-32">
+    <div class="col-12 margin-top-32 auth__en">
       <q-btn
         class="full-width action-button action-button--active"
-        @click="setStep($AUTH.CONFIRM_SMS)"
+        @click="setStep(AUTH.STEP_BY_SMS_CONFIRM)"
       >
         <span>{{ $t('action.receiveCode') }}</span>
       </q-btn>
@@ -50,11 +50,23 @@
 </template>
 
 <script>
+import { inject } from 'vue'
 import { mapActions } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 
 export default {
-  name: 'DesktopAuthSignInBySmsForm',
+  name: 'DesktopAuthBySmsForm',
+  setup() {
+    const AUTH = inject('AUTH')
+    const CONFIG = inject('CONFIG')
+    const VALIDATION = inject('VALIDATION')
+
+    return {
+      AUTH,
+      CONFIG,
+      VALIDATION,
+    }
+  },
   data() {
     return {
       phone: '+7 (903) 261-93-16',

@@ -15,6 +15,8 @@ export default {
       privacyPolicy: 'политики конфиденциальности',
       userAgreement: 'пользовательского соглашения',
     },
+    enterByPassword: 'Вход по паролю',
+    enterBySms: 'Вход по СМС',
     logo: {
       companyName: 'Рабочие руки',
       service: 'Сервис найма рабочей силы',
@@ -23,11 +25,7 @@ export default {
     sendSmsCodeAgain: 'Выслать СМС-код повторно',
     sentMessageToPhone:
       'На указанный Вами номер {phoneFormatted} отправлено СМС-сообщение',
-    signIn: {
-      enterByPassword: 'Вход по паролю',
-      enterBySms: 'Вход по СМС',
-      title: 'Вход в систему',
-    },
+    title: 'Вход в систему',
   },
   column: {
     // act: 'Акт',

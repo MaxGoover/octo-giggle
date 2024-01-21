@@ -10,7 +10,7 @@ export default {
       userAgreement: 'https://legal.handswork.pro/user-agreement',
     },
     timer: {
-      duration: 300, // (сек) до возможности получения нового СМС-кода для авторизации
+      duration: 3, // (сек) до возможности получения нового СМС-кода для авторизации
     },
   },
   debounce: {

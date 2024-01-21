@@ -1,6 +1,7 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { Notify, Quasar } from 'quasar'
+import { readonly } from 'vue'
 
 // Import i18n
 import { createI18n } from 'vue-i18n'
@@ -23,10 +24,11 @@ import '@quasar/extras/mdi-v7/mdi-v7.css'
 import 'quasar/src/css/index.sass'
 
 // Import constants
-import $AUTH from '@/utils/consts/auth'
-import $CONFIG from '@/utils/settings/config'
-import $ICONS from '@/utils/consts/icons'
-import $VALIDATION from '@/utils/settings/validation'
+import AUTH from '@/utils/consts/auth'
+import COLORS from '@/utils/consts/colors'
+import CONFIG from '@/utils/settings/config'
+import ICONS from '@/utils/consts/icons'
+import VALIDATION from '@/utils/settings/validation'
 
 createInertiaApp({
   resolve: (name) => {
@@ -35,6 +37,11 @@ createInertiaApp({
   },
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) })
+      .provide('AUTH', readonly(AUTH))
+      .provide('COLORS', readonly(COLORS))
+      .provide('CONFIG', readonly(CONFIG))
+      .provide('ICONS', readonly(ICONS))
+      .provide('VALIDATION', readonly(VALIDATION))
       .use(plugin)
       .use(Quasar, {
         config: {},
@@ -42,12 +49,6 @@ createInertiaApp({
       })
       .use(i18n)
       .use(pinia)
-
-    // Define global variables
-    app.config.globalProperties.$AUTH = $AUTH;
-    app.config.globalProperties.$CONFIG = $CONFIG;
-    app.config.globalProperties.$ICONS = $ICONS;
-    app.config.globalProperties.$VALIDATION = $VALIDATION;
     app.mount(el)
   },
 })

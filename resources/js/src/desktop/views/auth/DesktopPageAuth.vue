@@ -1,97 +1,109 @@
 <template>
-  <div class="auth-sign-in">
+  <div class="auth-page">
+    <!--Заголовок-->
     <div class="text-text-primary font-size-36">
       <span class="text-bold">CRM</span>
-      <span class="q-ml-sm text-weight-regular">{{
-        $t('auth.signIn.title')
-      }}</span>
+      <span class="q-ml-sm text-weight-regular">{{ $t('auth.title') }}</span>
     </div>
-    <div class="row q-mt-xs">
+
+    <!--Выбор типа авторизации-->
+    <div class="row q-mt-lg">
       <div
         class="auth-toggle-text"
-        :class="{ 'text-grey-dark': !isAuthTypeBySms }"
+        :class="{ 'text-grey-dark': !isStepAuthTypeBySms }"
       >
-        <span>{{ $t('auth.signIn.enterBySms') }}</span>
+        <span>{{ $t('auth.enterBySms') }}</span>
       </div>
       <q-toggle
         v-model="authType"
         class="q-px-md"
         color="hover-c"
         keep-color
-        :true-value="$AUTH.ENTER_BY_SMS"
-        :false-value="$AUTH.ENTER_BY_PASSWORD"
-        @update:model-value="setStep"
+        :true-value="AUTH.TYPE_ENTER_BY_SMS"
+        :false-value="AUTH.TYPE_ENTER_BY_PASSWORD"
+        @update:model-value="authStore.toggleAuthType"
       />
       <div
         class="auth-toggle-text"
-        :class="{ 'text-grey-dark': isAuthTypeBySms }"
+        :class="{ 'text-grey-dark': isStepAuthTypeBySms }"
       >
-        <span>{{ $t('auth.signIn.enterByPassword') }}</span>
+        <span>{{ $t('auth.enterByPassword') }}</span>
       </div>
     </div>
+
+    <!--Форма авторизации-->
     <q-carousel
-      v-model="step"
-      class="q-mt-xl bg-main-theme-bg"
+      :model-value="authStore.step"
+      class="q-mt-lg bg-main-theme-bg"
       animated
       infinite
       navigation
     >
-      <q-carousel-slide :name="$AUTH.ENTER_BY_SMS">
-        <DesktopAuthSignInBySmsForm />
+      <q-carousel-slide :name="AUTH.STEP_BY_SMS_FORM">
+        <DesktopAuthBySmsForm />
       </q-carousel-slide>
-      <q-carousel-slide :name="$AUTH.CONFIRM_SMS">
-        <DesktopAuthSignInBySmsConfirm />
+      <q-carousel-slide :name="AUTH.STEP_BY_SMS_CONFIRM">
+        <DesktopAuthBySmsConfirm />
       </q-carousel-slide>
-      <q-carousel-slide :name="$AUTH.ENTER_BY_PASSWORD">
-        <DesktopAuthSignInByPasswordForm />
+      <q-carousel-slide :name="AUTH.STEP_BY_PASSWORD_FORM">
+        <DesktopAuthByPasswordForm />
       </q-carousel-slide>
     </q-carousel>
   </div>
 </template>
 
-<script>
-import { mapActions, mapWritableState } from 'pinia'
+<script setup>
+import { computed, inject, onMounted, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
-import DesktopAuthSignInByPasswordForm from '@/desktop/components/pages/auth/DesktopAuthSignInByPasswordForm.vue'
-import DesktopAuthSignInBySmsConfirm from '@/desktop/components/pages/auth/bySms/DesktopAuthSignInBySmsConfirm.vue'
-import DesktopAuthSignInBySmsForm from '@/desktop/components/pages/auth/bySms/DesktopAuthSignInBySmsForm.vue'
+import DesktopAuthByPasswordForm from '@/desktop/components/pages/auth/DesktopAuthByPasswordForm.vue'
+import DesktopAuthBySmsConfirm from '@/desktop/components/pages/auth/bySms/DesktopAuthBySmsConfirm.vue'
+import DesktopAuthBySmsForm from '@/desktop/components/pages/auth/bySms/DesktopAuthBySmsForm.vue'
 import DesktopLayoutAuth from '@/desktop/layouts/DesktopLayoutAuth.vue'
 
-export default {
-  name: 'DesktopPageAuth',
-  components: {
-    DesktopAuthSignInByPasswordForm,
-    DesktopAuthSignInBySmsConfirm,
-    DesktopAuthSignInBySmsForm,
-  },
+defineOptions({
   layout: DesktopLayoutAuth,
-  computed: {
-    ...mapWritableState(useAuthStore, ['authType', 'step']),
-    isAuthTypeBySms() {
-      return [this.$AUTH.ENTER_BY_SMS, this.$AUTH.CONFIRM_SMS].includes(
-        this.step,
-      )
-    },
-  },
-//   mounted() {
-//     this.fetchCompanyCounters()
-//   },
-  methods: {
-    // ...mapActions(useAuthStore, ['fetchCompanyCounters', 'setStep']),
-    ...mapActions(useAuthStore, ['setStep']),
-  },
-}
+})
+
+// global variables
+const AUTH = inject('AUTH')
+
+const authStore = useAuthStore()
+const { authType } = storeToRefs(authStore)
+
+// computed
+const isStepAuthTypeBySms = computed(() => {
+  return [AUTH.STEP_BY_SMS_FORM, AUTH.STEP_BY_SMS_CONFIRM].includes(
+    authStore.step,
+  )
+})
+
+// mounted()
+onMounted(authStore.fetchCompanyCounters)
+
+// methods
+const isAuthTypeBySms = (type) => type === AUTH.TYPE_ENTER_BY_SMS
+const isAuthTypeByPassword = (type) => type === AUTH.TYPE_ENTER_BY_PASSWORD
+
+// watch
+watch(authType, (type) => {
+  if (isAuthTypeBySms(type)) {
+    authStore.setStep(AUTH.STEP_BY_SMS_FORM)
+  }
+  if (isAuthTypeByPassword(type)) {
+    authStore.setStep(AUTH.STEP_BY_PASSWORD_FORM)
+  }
+})
 </script>
 
 <style lang="sass" scoped>
 @import '@/css/colors'
-.auth-sign-in
-  margin-top: 20vh
+.auth-page
+  margin: 2vh auto 0 auto
   max-width: 380px
-  position: absolute
 
   @media only screen and (min-device-width: 1400px)
-    margin-top: 25vh
+    margin-top: 10vh
 .auth-toggle-text
   align-items: center
   color: $grey-darkest

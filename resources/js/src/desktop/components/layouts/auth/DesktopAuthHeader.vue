@@ -5,7 +5,7 @@
         <ComponentIcon
           class="company-logo-icon"
           :height="58"
-          :name="$ICONS.LOGO"
+          :name="ICONS.LOGO"
           :width="57"
         >
           <IconLogo />
@@ -45,17 +45,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { inject } from 'vue'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconLogo from '@/assets/icons/IconLogo.vue'
 
-export default {
-  name: 'DesktopAuthHeader',
-  components: {
-    ComponentIcon,
-    IconLogo,
-  },
-}
+// global variables
+const ICONS = inject('ICONS')
 </script>
 
 <style lang="sass" scoped>
@@ -64,13 +60,15 @@ export default {
   background-color: $main-theme-bg
   display: flex
   flex-wrap: wrap
-  margin-top: 7vh
-  position: absolute
+  padding-left: 2vw
+  padding-top: 4vh
   width: 100%
+
+  @media only screen and (min-device-width: 1400px)
+    padding-left: 4vw
+    padding-top: 7vh
 .company
   &-logo
-    margin-left: 4vw
-
     &-text
       color: $text-primary
 
