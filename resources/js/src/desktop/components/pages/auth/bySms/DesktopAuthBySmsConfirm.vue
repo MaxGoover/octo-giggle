@@ -30,6 +30,7 @@
     <q-btn
       class="q-mt-sm full-width action-button action-button--secondary"
       :disable="!timer.isTimeUp.value"
+      @click=";[timer.reset(), timer.start()]"
     >
       <ComponentIcon
         class="q-mr-md"

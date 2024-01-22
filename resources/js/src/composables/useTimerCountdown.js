@@ -8,10 +8,10 @@ import helpersDateTime from '@/utils/helpers/dateTime'
  */
 export default function useTimerCountdown(durationValue) {
   const duration = ref(durationValue) // длительность таймера
-  const interval = ref(0)             // интервал таймера
-  const minutes = ref(0)              // минуты таймера
-  const remaining = ref(0)            // время до окончания таймера (в секундах)
-  const seconds = ref(0)              // секунды таймера
+  const interval = ref(0) // интервал таймера
+  const minutes = ref(0) // минуты таймера
+  const remaining = ref(0) // время до окончания таймера (в секундах)
+  const seconds = ref(0) // секунды таймера
 
   /**
    * Определяет, закончился ли счетчик времени у таймера
@@ -103,6 +103,8 @@ export default function useTimerCountdown(durationValue) {
   return {
     isTimeUp,
     minutes,
+    reset,
     seconds,
+    start,
   }
 }
