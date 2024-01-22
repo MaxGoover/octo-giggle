@@ -29,7 +29,7 @@
     <!--Выслать код повторно-->
     <q-btn
       class="q-mt-sm full-width action-button action-button--secondary"
-      :disable="!timer.isTimeUp"
+      :disable="!timer.isTimeUp.value"
     >
       <ComponentIcon
         class="q-mr-md"
@@ -58,9 +58,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, reactive, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useAuthStore } from '@/stores/auth'
+import { inject, ref } from 'vue'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconArrowsSynchronize from '@/assets/icons/IconArrowsSynchronize.vue'
 import useTimerCountdown from '@/composables/useTimerCountdown'
@@ -72,52 +70,6 @@ const ICONS = inject('ICONS')
 const phoneFormatted = ref('+7 (903) 261-93-16')
 const smsCode = ref('')
 const timer = useTimerCountdown(CONFIG.auth.timer.duration)
-
-// const authStore = useAuthStore()
-// const { timer } = storeToRefs(authStore)
-
-console.log('timer', timer.seconds.value)
-
-// export default {
-//   name: 'DesktopAuthBySmsConfirm',
-//   components: {
-//     ComponentIcon,
-//     IconArrowsSynchronize,
-//   },
-//   setup() {
-//     // global variables
-//     const COLORS = inject('COLORS')
-//     const ICONS = inject('ICONS')
-
-//     return {
-//       COLORS,
-//       ICONS,
-//     }
-//   },
-//   data() {
-//     return {
-//       phoneFormatted: '+7 (903) 261-93-16',
-//       smsCode: '',
-//     }
-//   },
-//   computed: {
-//     ...mapState(useAuthStore, ['timer']),
-//   },
-//   watch: {
-//     timer: {
-//       deep: true,
-//       immediate: true,
-//       handler: function (timer) {
-//         if (timer.isTimeUp()) {
-//           timer.clear()
-//         }
-//       },
-//     },
-//   },
-//   mounted() {
-//     this.timer.start()
-//   },
-// }
 </script>
 
 <style lang="sass" scoped>

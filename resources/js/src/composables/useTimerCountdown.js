@@ -3,69 +3,106 @@ import helpersDateTime from '@/utils/helpers/dateTime'
 
 /**
  * Таймер обратного отсчёта.
- * @param {int} dur
- * @returns
+ * @param {int} durationValue - Длительность таймера в секундах
+ * @returns {Object}
  */
-export default function useTimerCountdown(dur) {
-  let duration = ref(0)
-  let interval = ref(0)
-  let minutes = ref(0)
-  let remaining = ref(0)
-  let seconds = ref(0)
+export default function useTimerCountdown(durationValue) {
+  const duration = ref(durationValue) // длительность таймера
+  const interval = ref(0)             // интервал таймера
+  const minutes = ref(0)              // минуты таймера
+  const remaining = ref(0)            // время до окончания таймера (в секундах)
+  const seconds = ref(0)              // секунды таймера
 
-  duration = dur
+  /**
+   * Определяет, закончился ли счетчик времени у таймера
+   * @returns {Boolean}
+   */
+  const isTimeUp = computed(() => {
+    return remaining.value === 0
+  })
 
-  // computed
-  const isTimeUp = computed(() => remaining === 0)
+  /**
+   * Убавляет таймер на одну секунду
+   * @returns {void}
+   */
+  const secondUp = () => {
+    remaining.value--
+  }
 
-  // watch
-//   watch(isTimeUp, (newValue) => {
-//     if (newValue) {
-//       clear()
-//     }
-//   })
-
-  // methods
-  const clear = () => clearInterval(interval)
+  /**
+   * Сбрасывает счетчик времени у таймера
+   * @returns {void}
+   */
   const reset = () => {
-    const time = helpersDateTime.formatTimeToMinutesSeconds(duration)
-    remaining = duration
-    minutes = time.split(':')[0]
-    seconds = time.split(':')[1]
+    const time = helpersDateTime.formatTimeToMinutesSeconds(duration.value)
+    remaining.value = duration.value
+    minutes.value = time.split(':')[0]
+    seconds.value = time.split(':')[1]
   }
+
+  /**
+   * Запускает счетчик времени у таймера
+   * @returns {void}
+   */
   const start = () => {
-    if (isTimeUp) {
-      reset()
-      interval = setInterval(() => {
-        tick()
-      }, 1000)
-    }
+    interval.value = setInterval(() => {
+      tick()
+    }, 1000)
   }
+
+  /**
+   * Останавливает счётчик времени у таймера
+   * @returns {void}
+   */
+  const stop = () => {
+    clearInterval(interval.value)
+  }
+
+  /**
+   * Один тик таймера
+   * @returns {void}
+   */
   const tick = () => {
-    remaining--
-    update()
-  }
-  const update = () => {
+    secondUp()
     updateMinutes()
     updateSeconds()
   }
+
+  /**
+   * Обновляет минуты таймера
+   * @returns {void}
+   */
   const updateMinutes = () => {
-    minutes = parseInt(remaining / 60, 10)
-  }
-  const updateSeconds = () => {
-    seconds = parseInt(remaining % 60, 10)
-    seconds = seconds < 10 ? '0' + seconds : seconds
+    minutes.value = parseInt(remaining.value / 60, 10)
   }
 
-  // hooks
-  onMounted(start)
+  /**
+   * Обновляет секунды таймера
+   * @returns {void}
+   */
+  const updateSeconds = () => {
+    seconds.value = parseInt(remaining.value % 60, 10)
+    seconds.value = seconds.value < 10 ? '0' + seconds.value : seconds.value
+  }
+
+  /**
+   * Останавливает таймер по окончании времени
+   * @returns {void}
+   */
+  watch(isTimeUp, (newValue) => {
+    if (newValue) {
+      stop()
+    }
+  })
+
+  onMounted(() => {
+    reset()
+    start()
+  })
 
   return {
-    clear,
     isTimeUp,
     minutes,
-    reset,
     seconds,
-    start,
   }
 }
