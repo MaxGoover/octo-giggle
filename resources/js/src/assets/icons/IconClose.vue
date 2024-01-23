@@ -3,14 +3,14 @@
     <g clip-path="url(#clip0_1877_86233)">
       <path
         d="M7.47754 7.2002L17.0775 16.8002"
-        :stroke="$COLOR.GREY_3"
+        :stroke="getPaletteColor('grey-5')"
         stroke-width="1.8"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <path
         d="M7.47754 7.2002L17.0775 16.8002"
-        :stroke="$COLOR.ACCENT_FONT"
+        :stroke="getPaletteColor('dark')"
         stroke-opacity="0.2"
         stroke-width="1.8"
         stroke-linecap="round"
@@ -18,14 +18,14 @@
       />
       <path
         d="M7.47754 16.7998L17.0775 7.19981"
-        :stroke="$COLOR.GREY_3"
+        :stroke="getPaletteColor('grey-5')"
         stroke-width="1.8"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <path
         d="M7.47754 16.7998L17.0775 7.19981"
-        :stroke="$COLOR.ACCENT_FONT"
+        :stroke="getPaletteColor('dark')"
         stroke-opacity="0.2"
         stroke-width="1.8"
         stroke-linecap="round"
@@ -45,8 +45,8 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: 'IconClose',
-}
+<script setup>
+import { colors } from 'quasar'
+
+const { getPaletteColor } = colors
 </script>

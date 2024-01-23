@@ -7,8 +7,8 @@
       bg-color="white"
       clear-icon="close"
       clearable
-      color="default-bg"
-      label-color="grey-dark"
+      color="blue-grey-1"
+      label-color="grey-7"
       no-error-icon
       outlined
       type="tel"
@@ -21,7 +21,7 @@
         <template #linkUserAgreement>
           <a
             :href="CONFIG.auth.link.userAgreement"
-            class="text-text-link text-decoration-none"
+            class="text-indigo-12 text-decoration-none"
             target="_blank"
             >{{ $t('auth.doc.userAgreement') }}</a
           >
@@ -29,7 +29,7 @@
         <template #linkPrivacyPolicy>
           <a
             :href="CONFIG.auth.link.privacyPolicy"
-            class="text-text-link text-decoration-none"
+            class="text-indigo-12 text-decoration-none"
             target="_blank"
             >{{ $t('auth.doc.privacyPolicy') }}</a
           >
@@ -38,10 +38,10 @@
     </div>
 
     <!--Получить код-->
-    <div class="col-12 margin-top-32 auth__en">
+    <div class="col-12 mt-40">
       <q-btn
-        class="full-width action-button action-button--active"
-        @click="setStep(AUTH.STEP_BY_SMS_CONFIRM)"
+        class="full-width h-56 action-button action-button--active"
+        @click="authStore.setStep(AUTH.STEP_BY_SMS_CONFIRM)"
       >
         <span>{{ $t('action.receiveCode') }}</span>
       </q-btn>
@@ -49,33 +49,17 @@
   </div>
 </template>
 
-<script>
-import { inject } from 'vue'
-import { mapActions } from 'pinia'
+<script setup>
+import { inject, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
-export default {
-  name: 'DesktopAuthBySmsForm',
-  setup() {
-    const AUTH = inject('AUTH')
-    const CONFIG = inject('CONFIG')
-    const VALIDATION = inject('VALIDATION')
+const AUTH = inject('AUTH')
+const CONFIG = inject('CONFIG')
+const VALIDATION = inject('VALIDATION')
 
-    return {
-      AUTH,
-      CONFIG,
-      VALIDATION,
-    }
-  },
-  data() {
-    return {
-      phone: '+7 (903) 261-93-16',
-    }
-  },
-  methods: {
-    ...mapActions(useAuthStore, ['setStep']),
-  },
-}
+const authStore = useAuthStore()
+
+const phone = ref('+7 (903) 261-93-16')
 </script>
 
 <style lang="sass" scoped>

@@ -7,8 +7,8 @@
       bg-color="white"
       clear-icon="close"
       clearable
-      color="default-bg"
-      label-color="grey-dark"
+      color="blue-grey-1"
+      label-color="grey-7"
       no-error-icon
       outlined
       :label="$t('field.smsCode')"
@@ -28,13 +28,13 @@
 
     <!--Выслать код повторно-->
     <q-btn
-      class="q-mt-sm full-width action-button action-button--secondary"
+      class="q-mt-sm full-width h-56 action-button action-button--secondary"
       :disable="!timer.isTimeUp.value"
       @click=";[timer.reset(), timer.start()]"
     >
       <ComponentIcon
         class="q-mr-md"
-        :color-stroke="COLORS.MAIN_THEME"
+        :color-stroke="getPaletteColor('primary')"
         :height="24"
         :name="ICONS.ARROWS_SYNCHRONIZE"
         :width="24"
@@ -51,7 +51,7 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-lg">
-      <q-btn class="full-width action-button action-button--active">
+      <q-btn class="full-width h-56 action-button action-button--active">
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>
@@ -59,14 +59,16 @@
 </template>
 
 <script setup>
+import { colors } from 'quasar'
 import { inject, ref } from 'vue'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconArrowsSynchronize from '@/assets/icons/IconArrowsSynchronize.vue'
 import useTimerCountdown from '@/composables/useTimerCountdown'
 
-const COLORS = inject('COLORS')
 const CONFIG = inject('CONFIG')
 const ICONS = inject('ICONS')
+
+const { getPaletteColor } = colors
 
 const phoneFormatted = ref('+7 (903) 261-93-16')
 const smsCode = ref('')

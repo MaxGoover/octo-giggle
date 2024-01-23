@@ -7,9 +7,3 @@
     />
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconProfessionsManConstruction1',
-}
-</script>

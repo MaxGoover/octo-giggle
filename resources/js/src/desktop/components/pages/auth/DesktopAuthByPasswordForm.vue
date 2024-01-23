@@ -7,8 +7,8 @@
       bg-color="white"
       clear-icon="close"
       clearable
-      color="main-theme"
-      label-color="grey-dark"
+      color="primary"
+      label-color="grey-7"
       no-error-icon
       outlined
       type="tel"
@@ -23,8 +23,8 @@
       class="col-12 q-mt-md"
       bg-color="white"
       clear-icon="close"
-      color="main-theme"
-      label-color="grey-dark"
+      color="primary"
+      label-color="grey-7"
       no-error-icon
       outlined
       :type="passwordFieldType"
@@ -46,7 +46,7 @@
         <template #linkUserAgreement>
           <a
             :href="CONFIG.auth.link.userAgreement"
-            class="text-text-link text-decoration-none"
+            class="text-indigo-12 text-decoration-none"
             target="_blank"
             >{{ $t('auth.doc.userAgreement') }}</a
           >
@@ -54,7 +54,7 @@
         <template #linkPrivacyPolicy>
           <a
             :href="CONFIG.auth.link.privacyPolicy"
-            class="text-text-link text-decoration-none"
+            class="text-indigo-12 text-decoration-none"
             target="_blank"
             >{{ $t('auth.doc.privacyPolicy') }}</a
           >
@@ -64,7 +64,7 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-xs">
-      <q-btn class="full-width action-button action-button--primary">
+      <q-btn class="full-width h-56 action-button action-button--primary">
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>

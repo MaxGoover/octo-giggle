@@ -1,8 +1,8 @@
 <template>
-  <q-layout class="bg-main-theme-bg" view="lhh lpr lFf">
+  <q-layout class="bg-grey-1" view="lhh lpr lFf">
     <DesktopAuthHeader />
     <slot />
-    <DesktopAuthFooter class="bg-main-theme-bg" />
+    <DesktopAuthFooter class="bg-grey-1" />
   </q-layout>
 </template>
 

@@ -26,9 +26,3 @@
     />
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconArrowsSynchronize',
-}
-</script>

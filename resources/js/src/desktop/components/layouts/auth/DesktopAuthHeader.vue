@@ -50,14 +50,12 @@ import { inject } from 'vue'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconLogo from '@/assets/icons/IconLogo.vue'
 
-// global variables
 const ICONS = inject('ICONS')
 </script>
 
 <style lang="sass" scoped>
-@import '@/css/colors'
 .auth-header
-  background-color: $main-theme-bg
+  background-color: $grey-1
   display: flex
   flex-wrap: wrap
   padding-left: 2vw
@@ -70,7 +68,7 @@ const ICONS = inject('ICONS')
 .company
   &-logo
     &-text
-      color: $text-primary
+      color: $grey-9
 
       &__primary
         font-size: 36px
@@ -86,7 +84,7 @@ const ICONS = inject('ICONS')
     margin-left: 16px
 
     &-text
-      color: $text-secondary
+      color: $grey-6
 
       &__primary
         font-size: 28px

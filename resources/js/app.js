@@ -25,7 +25,6 @@ import 'quasar/src/css/index.sass'
 
 // Import constants
 import AUTH from '@/utils/consts/auth'
-import COLORS from '@/utils/consts/colors'
 import CONFIG from '@/utils/settings/config'
 import ICONS from '@/utils/consts/icons'
 import VALIDATION from '@/utils/settings/validation'
@@ -38,7 +37,6 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) })
       .provide('AUTH', readonly(AUTH))
-      .provide('COLORS', readonly(COLORS))
       .provide('CONFIG', readonly(CONFIG))
       .provide('ICONS', readonly(ICONS))
       .provide('VALIDATION', readonly(VALIDATION))

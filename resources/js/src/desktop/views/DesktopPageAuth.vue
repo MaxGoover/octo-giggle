@@ -1,7 +1,7 @@
 <template>
   <div class="auth-page">
     <!--Заголовок-->
-    <div class="text-text-primary font-size-36">
+    <div class="text-grey-9 font-size-36">
       <span class="text-bold">CRM</span>
       <span class="q-ml-sm text-weight-regular">{{ $t('auth.title') }}</span>
     </div>
@@ -10,14 +10,14 @@
     <div class="row q-mt-lg">
       <div
         class="auth-toggle-text"
-        :class="{ 'text-grey-dark': !isStepAuthTypeBySms }"
+        :class="{ 'text-grey-7': !isStepAuthTypeBySms }"
       >
         <span>{{ $t('auth.enterBySms') }}</span>
       </div>
       <q-toggle
         v-model="authType"
         class="q-px-md"
-        color="hover-c"
+        color="indigo-3"
         keep-color
         :true-value="AUTH.TYPE_ENTER_BY_SMS"
         :false-value="AUTH.TYPE_ENTER_BY_PASSWORD"
@@ -25,7 +25,7 @@
       />
       <div
         class="auth-toggle-text"
-        :class="{ 'text-grey-dark': isStepAuthTypeBySms }"
+        :class="{ 'text-grey-7': isStepAuthTypeBySms }"
       >
         <span>{{ $t('auth.enterByPassword') }}</span>
       </div>
@@ -34,7 +34,7 @@
     <!--Форма авторизации-->
     <q-carousel
       :model-value="authStore.step"
-      class="q-mt-lg bg-main-theme-bg"
+      class="q-mt-lg bg-grey-1"
       animated
       infinite
       navigation
@@ -97,7 +97,6 @@ watch(authType, (type) => {
 </script>
 
 <style lang="sass" scoped>
-@import '@/css/colors'
 .auth-page
   margin: 2vh auto 0 auto
   max-width: 380px
@@ -106,18 +105,18 @@ watch(authType, (type) => {
     margin-top: 10vh
 .auth-toggle-text
   align-items: center
-  color: $grey-darkest
+  color: $grey-10
   display: flex
   font-family: Lato, sans-serif
   font-weight: 600
 .q-toggle
   transform: rotate(180deg)
 // цвет "пальца" тумблера
-:deep(.q-toggle__inner--falsy.text-hover-c > .q-toggle__thumb::after)
-  background-color: $hover-c
+:deep(.q-toggle__inner--falsy.text-indigo-3 > .q-toggle__thumb::after)
+  background-color: $indigo-3
 // цвет "дорожки" тумблера
-:deep(.q-toggle__inner--falsy.text-hover-c > .q-toggle__track)
-  background-color: $hover-c
+:deep(.q-toggle__inner--falsy.text-indigo-3 > .q-toggle__track)
+  background-color: $indigo-3
 // убираем у карусели дефолтные padding`и
 :deep(.q-carousel__slide)
   padding: 0

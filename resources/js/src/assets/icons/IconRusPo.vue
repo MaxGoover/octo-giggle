@@ -216,9 +216,3 @@
     </defs>
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconRusPo',
-}
-</script>

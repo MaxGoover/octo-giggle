@@ -5941,9 +5941,3 @@
     </defs>
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconFns',
-}
-</script>

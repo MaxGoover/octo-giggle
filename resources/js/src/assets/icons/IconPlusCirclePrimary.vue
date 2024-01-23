@@ -22,9 +22,3 @@
     </defs>
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconPlusCirclePrimary',
-}
-</script>

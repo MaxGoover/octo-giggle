@@ -23,9 +23,3 @@
     </defs>
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconSearch',
-}
-</script>

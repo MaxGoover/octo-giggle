@@ -24,9 +24,3 @@
     />
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconLogo2',
-}
-</script>

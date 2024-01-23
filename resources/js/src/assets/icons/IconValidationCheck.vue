@@ -7,9 +7,3 @@
     />
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconValidationCheck',
-}
-</script>

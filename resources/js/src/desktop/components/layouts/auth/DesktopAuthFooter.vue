@@ -54,14 +54,12 @@ import IconInnovation from '@/assets/icons/IconInnovation.vue'
 import IconRusPo from '@/assets/icons/IconRusPo.vue'
 import IconSkolkovo from '@/assets/icons/IconSkolkovo.vue'
 
-// global variables
 const ICONS = inject('ICONS')
 </script>
 
 <style lang="sass" scoped>
-@import '@/css/colors'
 .auth-footer
-  background-color: $main-theme-bg
+  background-color: $grey-1
   bottom: 0
   display: flex
   flex-wrap: wrap

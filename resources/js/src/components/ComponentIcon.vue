@@ -14,30 +14,27 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: 'ComponentIcon',
-  props: {
-    colorFill: {
-      type: String,
-      default: 'none',
-    },
-    colorStroke: {
-      type: String,
-      default: 'none',
-    },
-    height: {
-      type: Number,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    width: {
-      type: Number,
-      required: true,
-    },
+<script setup>
+const props = defineProps({
+  colorFill: {
+    type: String,
+    default: 'none',
   },
-}
+  colorStroke: {
+    type: String,
+    default: 'none',
+  },
+  height: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  width: {
+    type: Number,
+    required: true,
+  },
+})
 </script>

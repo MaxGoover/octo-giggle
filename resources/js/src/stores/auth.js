@@ -1,14 +1,11 @@
 import { defineStore } from 'pinia'
-import { TimerCountdown } from '@/entities/auth/TimerCountdown'
 import AUTH from '@/utils/consts/auth'
-import CONFIG from '@/utils/settings/config'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     // isShowedAuthLoader: false,
     authType: AUTH.TYPE_ENTER_BY_SMS,
     step: AUTH.STEP_BY_SMS_FORM,
-    timer: new TimerCountdown(CONFIG.auth.timer.duration),
   }),
 
   getters: {},

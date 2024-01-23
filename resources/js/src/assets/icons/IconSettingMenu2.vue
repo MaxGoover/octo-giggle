@@ -23,9 +23,3 @@
     />
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'IconSettingMenu2',
-}
-</script>
