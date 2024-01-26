@@ -51,7 +51,7 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-lg">
-      <q-btn class="full-width h-56 action-button action-button--active">
+      <q-btn class="full-width h-56 action-button action-button--primary">
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>

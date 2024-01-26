@@ -1,7 +1,9 @@
 <template>
   <q-layout class="bg-grey-1" view="lhh lpr lFf">
     <DesktopAuthHeader />
-    <slot />
+    <q-page-container>
+      <slot />
+    </q-page-container>
     <DesktopAuthFooter class="bg-grey-1" />
   </q-layout>
 </template>

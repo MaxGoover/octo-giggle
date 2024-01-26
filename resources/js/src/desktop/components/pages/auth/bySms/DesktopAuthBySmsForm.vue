@@ -40,7 +40,7 @@
     <!--Получить код-->
     <div class="col-12 mt-40">
       <q-btn
-        class="full-width h-56 action-button action-button--active"
+        class="full-width h-56 action-button action-button--primary"
         @click="authStore.setStep(AUTH.STEP_BY_SMS_CONFIRM)"
       >
         <span>{{ $t('action.receiveCode') }}</span>

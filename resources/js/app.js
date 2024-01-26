@@ -1,16 +1,8 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
+import { i18n } from '@/boot/i18n.js'
 import { Notify, Quasar } from 'quasar'
 import { readonly } from 'vue'
-
-// Import i18n
-import { createI18n } from 'vue-i18n'
-import messages from '@/i18n'
-const i18n = createI18n({
-  globalInjection: true,
-  locale: 'ru-RU',
-  messages,
-})
 
 // Import Pinia
 import { createPinia } from 'pinia'
@@ -27,6 +19,8 @@ import 'quasar/src/css/index.sass'
 import AUTH from '@/utils/consts/auth'
 import CONFIG from '@/utils/settings/config'
 import ICONS from '@/utils/consts/icons'
+import LEFT_DRAWER_MENU from '@/utils/consts/leftDrawerMenu'
+import ROUTES from '@/utils/consts/routes'
 import VALIDATION from '@/utils/settings/validation'
 
 createInertiaApp({
@@ -39,6 +33,8 @@ createInertiaApp({
       .provide('AUTH', readonly(AUTH))
       .provide('CONFIG', readonly(CONFIG))
       .provide('ICONS', readonly(ICONS))
+      .provide('LEFT_DRAWER_MENU', readonly(LEFT_DRAWER_MENU))
+      .provide('ROUTES', readonly(ROUTES))
       .provide('VALIDATION', readonly(VALIDATION))
       .use(plugin)
       .use(Quasar, {

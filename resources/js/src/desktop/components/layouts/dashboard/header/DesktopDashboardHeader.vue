@@ -59,6 +59,6 @@ import IconPlusCirclePrimary from '@/assets/icons/IconPlusCirclePrimary.vue'
 const ICONS = inject('ICONS')
 </script>
 
-<style lang="sass">
-
+<style lang="sass" scoped>
+@import '@/css/buttons'
 </style>
