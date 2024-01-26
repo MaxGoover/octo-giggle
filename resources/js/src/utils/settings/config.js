@@ -25,4 +25,12 @@ export default {
       },
     },
   },
+  pagination: {
+    descending: true,
+    page: 1,
+    rowsNumber: null,
+    rowsPerPage: 10,
+    search: null,
+    sortBy: null,
+  },
 }

@@ -1,19 +1,19 @@
 <template>
-  <!-- <Link :href="menuSection.route"> -->
   <q-btn flat round color="bg-indigo-3" :title="menuSection.title">
-    <ComponentIcon
-      :color-stroke="getPaletteColor('indigo-3')"
-      :height="16"
-      :name="menuSection.icon"
-      :width="16"
-    >
-      <!--Подключение нужной иконки меню-->
-      <component
-        :is="icons[`Icon${capitalizeFirstLetter(menuSection.icon)}`]"
-      />
-    </ComponentIcon>
+    <Link :href="menuSection.route" class="h-16">
+      <ComponentIcon
+        :color-stroke="getPaletteColor('indigo-3')"
+        :height="16"
+        :name="menuSection.icon"
+        :width="16"
+      >
+        <!--Подключение нужной иконки меню-->
+        <component
+          :is="icons[`Icon${capitalizeFirstLetter(menuSection.icon)}`]"
+        />
+      </ComponentIcon>
+    </Link>
   </q-btn>
-  <!-- </Link> -->
 </template>
 
 <script setup>

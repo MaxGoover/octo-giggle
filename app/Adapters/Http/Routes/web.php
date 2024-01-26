@@ -14,7 +14,9 @@ Route::get('/auth', function () {
     return Inertia('desktop/views/DesktopPageAuth');
 });
 
-Route::resource('todos', TodoController::class);
+Route::get('/workers', function () {
+    return Inertia('desktop/views/workers/DesktopPageWorkersIndex');
+});
 
 Route::get('/', function () {
     return Inertia('desktop/views/DesktopPageDashboard');

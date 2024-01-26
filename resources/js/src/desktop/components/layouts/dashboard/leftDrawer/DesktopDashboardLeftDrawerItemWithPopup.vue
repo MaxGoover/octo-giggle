@@ -18,10 +18,15 @@
           v-for="(menuItem, index) in menuSection"
           :key="menuItem.title"
         >
-          <q-item v-if="index" clickable v-close-popup>
-            <q-item-section>{{ menuItem.title }}</q-item-section>
-          </q-item></template
-        >
+          <Link class="text-decoration-none" :href="menuItem.route">
+            <q-item v-if="index" class="bg-grey-1" clickable v-close-popup>
+              <q-item-section
+                class="text-indigo-8 text-weight-regular font-lato"
+                >{{ menuItem.title }}</q-item-section
+              >
+            </q-item>
+          </Link>
+        </template>
       </q-list>
     </q-menu>
   </q-btn>
@@ -30,6 +35,7 @@
 <script setup>
 import { capitalizeFirstLetter } from '@/utils/helpers'
 import { colors } from 'quasar'
+import { Link } from '@inertiajs/vue3'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconContentArchiveLocker from '@/assets/icons/IconContentArchiveLocker.vue'
 import IconFileClipboard from '@/assets/icons/IconFileClipboard.vue'
