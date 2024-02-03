@@ -1,6 +1,6 @@
 export default {
   action: {
-    addWorker: 'Добавить исполнителя',
+    addWorker: 'Добавить работника',
     close: 'Закрыть',
     enterSystem: 'Войти в систему',
     goMain: 'На главную',

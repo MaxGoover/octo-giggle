@@ -2,7 +2,7 @@
   <q-layout class="bg-grey-1" view="lhh lpr lFf">
     <DesktopDashboardHeader class="bg-grey-1" />
     <DesktopDashboardLeftDrawerMenu />
-    <q-page-container>
+    <q-page-container class="q-mx-sm window-height">
       <slot />
     </q-page-container>
   </q-layout>

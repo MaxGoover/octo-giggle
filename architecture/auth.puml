@@ -1,0 +1,16 @@
+@startuml Auth
+
+title Авторизация пользователя
+
+actor :Пользователь: as User
+
+usecase (Авторизация через смс) as AuthBySms
+usecase (Авторизация по паролю) as AuthByPassword
+
+' -> это стрелка вправо '
+' --> это стрелка вниз '
+
+User --> AuthBySms
+User --> AuthByPassword
+
+@enduml

@@ -1,7 +1,7 @@
 <template>
   <q-table
     v-model:pagination="paginationStore.pagination"
-    class="bg-white my-sticky-header-table workers-table"
+    class="my-sticky-header-table workers-table"
     flat
     row-key="id"
     separator="none"
@@ -84,6 +84,7 @@
 <script setup>
 import { colors } from 'quasar'
 import { inject } from 'vue'
+import { paginationLabel } from '@/utils/helpers/table'
 import { useCommonStore } from '@/stores/common'
 import { usePaginationStore } from '@/stores/pagination'
 import ComponentIcon from '@/components/ComponentIcon.vue'
@@ -105,37 +106,13 @@ const { getPaletteColor } = colors
 const ICONS = inject('ICONS')
 const commonStore = useCommonStore()
 const paginationStore = usePaginationStore()
-
-// export default {
-//   name: 'DesktopWorkersTable',
-//   components: {
-//     ComponentIcon,
-//     DesktopFilterTable,
-//     IconCog,
-//   },
-//   props: {
-//     columns: {
-//       type: Array,
-//       required: true,
-//     },
-//     rows: {
-//       type: Array,
-//       required: true,
-//     },
-//   },
-//   computed: {
-//     ...mapState(useCommonStore, ['isShowedTableLoader']),
-//     ...mapWritableState(usePaginationStore, ['pagination']),
-//   },
-//   methods: {
-//     ...mapActions(useCommonStore, ['showTableSettingsModal']),
-//   },
-// }
 </script>
 
 <style lang="sass" scoped>
 .workers-table
   border-radius: 8px
+  border: 1px solid $blue-grey-1
+  box-shadow: 0px 0px 14px 0px #BCBCE64D
 // шапка таблицы
 :deep(thead tr th)
   background-color: $indigo-5
