@@ -2,10 +2,9 @@
 
 use App\Adapters\Http\Actions\Worker\Index\WorkerIndexAction;
 use App\Adapters\Http\Actions\Auth\BySms\Form\AuthBySmsFormAction;
-use App\Adapters\Http\Actions\Auth\BySms\Confirm\AuthBySmsConfirmAction;
 use App\Adapters\Http\Actions\Auth\ByPassword\AuthByPasswordFormAction;
+use App\Adapters\Http\Actions\Auth\BySms\Confirm\AuthGetSmsCodeAction;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +12,24 @@ use Inertia\Inertia;
 |--------------------------------------------------------------------------
 */
 
+// идем постОм в 'auth/get-sms-code' (отдаем номер телефона)
+// если такого пользователя нет, отдаем ошибку - пользователь с таким номером не зарегистрирован
+// если все ок, тогда возвращаем номер телефона и id`шник смс-ки и редиректим пользователя на страницу 'auth/by-sms-confirm'
+
 // auth
 Route::get('auth/by-sms-form', AuthBySmsFormAction::class)
-    // ->name('auth')
     ->middleware('guest');
 
-Route::get('auth/by-sms-confirm', AuthBySmsConfirmAction::class)
-    // ->name('auth')
+Route::post('auth/send-sms-code', AuthGetSmsCodeAction::class)
     ->middleware('guest');
+
+Route::get('auth/by-sms-confirm', function () {
+    return redirect('auth/by-sms-form');
+})
+    ->middleware('guest');
+
+// Route::post('auth/by-sms-confirm', AuthBySmsConfirmAction::class)
+//     ->middleware('guest');
 
 Route::get('auth/by-password-form', AuthByPasswordFormAction::class)
     // ->name('auth')

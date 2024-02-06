@@ -1,8 +1,10 @@
 <?php
 
+use function PHPUnit\Framework\isEmpty;
+
 if (!function_exists('escape_search')) {
     /**
-     * Отфильтровывает строку от ненужных символов для поиска.
+     * Очищает строку от ненужных символов для поиска.
      * @param string $search
      * @return string
      */
@@ -14,20 +16,16 @@ if (!function_exists('escape_search')) {
     }
 }
 
-if (!function_exists('format_phone')) {
+if (!function_exists('clear_phone')) {
     /**
-     * Отфильтровывает номер телефона (или ИНН) от лишних символов и чисел для поиска.
+     * Очищает номер телефона (или ИНН) от лишних символов и чисел для поиска.
      * Например: '+7 (961) 854-98-05' -> '9618549805'
      *           '8-900-123-45-67' -> '9001234567'
      * @param $phone
      * @return string
      */
-    function format_phone($phone): string
+    function clear_phone(string $phone): string
     {
-        if (!is_string($phone)) {
-            return '';
-        }
-
         // Избавляемся от ненужных символов
         $filteredSearch = str_replace(['tel:', '+7', '+', '(', ')', '-', ' '], '', $phone);
 
@@ -68,16 +66,21 @@ if (!function_exists('escape_double_quotes_except_one')) {
     }
 }
 
-if (!function_exists('phone_format')) {
-    function phone_format($number, $prefix = '')
+if (!function_exists('format_phone')) {
+    /**
+     * Форматирует номер телефона.
+     * Например: '9618549805' -> '+7 (961) 854-98-05'
+     * @param $phone
+     * @return string
+     */
+    function format_phone($phone)
     {
-        if (ctype_digit($number) && strlen($number) === 10) {
-            return $prefix . ' (' . substr($number, 0, 3) . ') ' . substr($number, 3, 3) . '-' . substr($number, 6, 2) . '-' . substr($number, 8, 2);
-        } else if (ctype_digit($number) && strlen($number) === 7) {
-            return $prefix . ' (' . substr($number, 0, 3) . ') ' . substr($number, 3, 4);
-        }
-
-        return $number;
+        return '+7 (' . substr($phone, 0, 3) . ') ' . substr($phone, 3, 3) . '-' . substr($phone, 6, 2) . '-' . substr($phone, 8, 2);
     }
 }
 
+if (!function_exists('is_empty')) {
+    function is_empty(mixed $value) {
+        return isEmpty($value);
+    }
+}

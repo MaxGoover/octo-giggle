@@ -1,6 +1,6 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
-import { i18n } from '@/boot/i18n.js'
+import { i18n } from '@/boot/i18n'
 import { Notify, Quasar } from 'quasar'
 import { readonly } from 'vue'
 

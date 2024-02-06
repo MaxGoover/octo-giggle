@@ -4,5 +4,6 @@ export default {
     BY_SMS_CONFIRM: '/auth/by-sms-confirm',
     BY_SMS_FORM: '/auth/by-sms-form',
   },
+  MAIN: '/',
   WORKERS_INDEX: '/workers',
 }

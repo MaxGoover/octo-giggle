@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -76,8 +77,29 @@ class User extends Authenticatable
 
     /** Accessors/Mutators */
 
-    public static function findActiveByPhone($phone) :?self
+    public static function findActiveById(int $id): ?self
+    {
+        return self::active()->where('id', $id)->first();
+    }
+
+    public static function findActiveByPhone(string $phone): ?self
     {
         return self::active()->where('phone', $phone)->first();
+    }
+
+    /** Logic */
+
+    public static function generateToken(): string
+    {
+        $token = null;
+        do {
+            $token = Str::random(config('settings.user.api_token_length'));
+        } while (self::where('api_token', $token)->exists());
+
+        return hash('sha256', $token);
+    }
+
+    public static function isDeletedByPhone($phone): bool {
+        return self::onlyTrashed()->where('phone', $phone)->exists();
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Adapters\Http\Actions\Auth\ByPassword;
 
-use App\Adapters\Http\Actions\Action;
+use App\Adapters\Http\Actions\Controller;
 
-final class AuthByPasswordFormAction extends Action
+final class AuthByPasswordFormAction extends Controller
 {
     public function __invoke()
     {

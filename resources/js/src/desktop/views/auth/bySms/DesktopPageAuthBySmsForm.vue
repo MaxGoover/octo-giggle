@@ -2,7 +2,7 @@
   <div class="row">
     <!--Номер телефона-->
     <q-input
-      v-model="authStore.phone"
+      v-model="authStore.phoneFormatted"
       class="col-12"
       bg-color="white"
       clear-icon="close"
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { inject, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import DesktopLayoutAuth from '@/desktop/layouts/DesktopLayoutAuth.vue'
 

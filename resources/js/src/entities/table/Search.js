@@ -1,5 +1,5 @@
-import config from 'src/utils/config'
-import { i18n } from 'app/src/boot/i18n'
+import config from '@/utils/config'
+import { i18n } from '@/boot/i18n'
 
 /**
  * @property {string} placeholder

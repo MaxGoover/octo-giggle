@@ -32,8 +32,9 @@ return [
     ],
     'password_timeout' => 10800,
     'sms_code' => [
+        'expires' => 3600, // (сек)
         'min_number' => 11111,
         'max_number' => 99999,
-        'timeout' => 300, // (сек)
+        'timeout' => 10, // (сек)
     ],
 ];

@@ -95,7 +95,8 @@ export default function useTimerCountdown(durationValue) {
     }
   })
 
-  onMounted(() => {
+  watch(duration, () => {
+    console.log('duration', duration)
     reset()
     start()
   })

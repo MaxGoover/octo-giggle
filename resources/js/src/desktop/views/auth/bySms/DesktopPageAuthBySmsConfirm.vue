@@ -20,7 +20,7 @@
       <p>
         {{
           $t('auth.sentMessageToPhone', {
-            phoneFormatted,
+            phoneFormatted: authStore.phoneFormatted,
           })
         }}
       </p>
@@ -30,7 +30,7 @@
     <q-btn
       class="q-mt-sm full-width h-56 action-button action-button--secondary"
       :disable="!timer.isTimeUp.value"
-      @click=";[timer.reset(), timer.start()]"
+      @click="authStore.fetchSmsCode"
     >
       <ComponentIcon
         class="q-mr-md"
@@ -51,7 +51,7 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-lg">
-      <q-btn class="full-width h-56 action-button action-button--primary">
+      <q-btn class="full-width h-56 action-button action-button--primary" @click="authStore.authBySms">
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>
@@ -60,7 +60,9 @@
 
 <script setup>
 import { colors } from 'quasar'
-import { inject, ref } from 'vue'
+import { inject } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import DesktopLayoutAuth from '@/desktop/layouts/DesktopLayoutAuth.vue'
 import IconArrowsSynchronize from '@/assets/icons/IconArrowsSynchronize.vue'
@@ -70,14 +72,14 @@ defineOptions({
   layout: DesktopLayoutAuth,
 })
 
-const CONFIG = inject('CONFIG')
+const authStore = useAuthStore()
+const { smsCode, smsCodeTimeout } = storeToRefs(authStore)
+
 const ICONS = inject('ICONS')
 
 const { getPaletteColor } = colors
 
-const phoneFormatted = ref('+7 (903) 261-93-16')
-const smsCode = ref('')
-const timer = useTimerCountdown(CONFIG.auth.timer.duration)
+const timer = useTimerCountdown(smsCodeTimeout)
 </script>
 
 <style lang="sass" scoped>
