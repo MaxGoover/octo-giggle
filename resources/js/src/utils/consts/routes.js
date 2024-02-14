@@ -1,9 +1,11 @@
 export default {
   AUTH: {
-    BY_PASSWORD_FORM: '/auth/by-password-form',
-    BY_SMS_CONFIRM: '/auth/by-sms-confirm',
-    BY_SMS_FORM: '/auth/by-sms-form',
+    BY_EMAIL_CONFIRM: '/auth/by-email-confirm',
+    BY_EMAIL_FORM: '/auth/by-email-form',
+    BY_PHONE_CONFIRM: '/auth/by-phone-confirm',
+    BY_PHONE_FORM: '/auth/by-phone-form',
+    SEND_EMAIL_CODE: '/auth/send-email-code',
   },
-  MAIN: '/',
+  HOME: '/',
   WORKERS_INDEX: '/workers',
 }

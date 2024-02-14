@@ -1,9 +1,12 @@
 <?php
 
 use App\Adapters\Http\Actions\Worker\Index\WorkerIndexAction;
-use App\Adapters\Http\Actions\Auth\BySms\Form\AuthBySmsFormAction;
-use App\Adapters\Http\Actions\Auth\ByPassword\AuthByPasswordFormAction;
-use App\Adapters\Http\Actions\Auth\BySms\Confirm\AuthGetSmsCodeAction;
+use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailAction;
+use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailConfirmAction;
+use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailFormAction;
+use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneAction;
+use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneConfirmAction;
+use App\Adapters\Http\Actions\Dashboard\DashboardAction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,43 +15,35 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-// идем постОм в 'auth/get-sms-code' (отдаем номер телефона)
-// если такого пользователя нет, отдаем ошибку - пользователь с таким номером не зарегистрирован
-// если все ок, тогда возвращаем номер телефона и id`шник смс-ки и редиректим пользователя на страницу 'auth/by-sms-confirm'
 
 // auth
-Route::get('auth/by-sms-form', AuthBySmsFormAction::class)
+Route::get('auth/by-email-form', AuthByEmailAction::class)
+    ->name('auth')
     ->middleware('guest');
 
-Route::post('auth/send-sms-code', AuthGetSmsCodeAction::class)
+Route::post('auth/by-email-form', AuthByEmailFormAction::class)
+    ->name('auth.by_email_form')
     ->middleware('guest');
 
-Route::get('auth/by-sms-confirm', function () {
-    return redirect('auth/by-sms-form');
+Route::post('auth/by-email-confirm', AuthByEmailConfirmAction::class)
+    ->name('auth.by_email_confirm')
+    ->middleware('guest');
+
+Route::get('auth/by-phone-form', AuthByPhoneAction::class)
+    ->name('auth.by_phone_form')
+    ->middleware('guest');
+
+Route::get('auth/by-phone-confirm', function () {
+    return redirect('auth/by-phone-form');
 })
     ->middleware('guest');
 
-// Route::post('auth/by-sms-confirm', AuthBySmsConfirmAction::class)
-//     ->middleware('guest');
-
-Route::get('auth/by-password-form', AuthByPasswordFormAction::class)
-    // ->name('auth')
+Route::post('auth/by-phone-confirm', AuthByPhoneConfirmAction::class)
+    ->name('auth.by_phone_confirm')
     ->middleware('guest');
 
-// Route::post('auth', AuthSendSmsCodeAction::class)
-//     ->name('login.store')
-//     ->middleware('guest');
-
-// Route::get('users', [UsersController::class, 'index'])
-//     ->name('users')
-//     ->middleware('auth');
-
-// Route::get('workers', function () {
-//     return Inertia('desktop/views/workers/DesktopPageWorkersIndex');
-// });
+Route::get('/', DashboardAction::class)
+    ->name('home')
+    ->middleware('auth');
 
 Route::get('/workers', [WorkerIndexAction::class, 'handle']);
-
-Route::get('/', function () {
-    return Inertia('desktop/views/DesktopPageDashboard');
-});

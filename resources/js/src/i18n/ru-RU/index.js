@@ -9,22 +9,23 @@ export default {
   auth: {
     agreeConditions:
       'Осуществляя вход вы принимаете условия вы принимаете условия {linkUserAgreement} и {linkPrivacyPolicy} сервиса Рабочие руки',
-    agreeSmsCode: 'Для подтверждения, введите код авторизации в поле ниже',
+    agreeEmailCode: 'Для подтверждения, введите код авторизации в поле ниже',
     authorizationCode: 'Код авторизации из СМС',
     doc: {
       privacyPolicy: 'политики конфиденциальности',
       userAgreement: 'пользовательского соглашения',
     },
-    enterByPassword: 'Вход по паролю',
-    enterBySms: 'Вход по СМС',
+    enterByPhone: 'Вход по номеру телефона',
+    enterByEmail: 'Вход по почте',
     logo: {
       companyName: 'Рабочие руки',
       service: 'Сервис найма рабочей силы',
     },
     mightRepeatAfter: 'Повторить можно через {timerMinutes}:{timerSeconds}',
-    sendSmsCodeAgain: 'Выслать СМС-код повторно',
-    sentMessageToPhone:
-      'На указанный Вами номер {phoneFormatted} отправлено СМС-сообщение',
+    ofCustomers: 'заказчиков',
+    ofWorkers: 'исполнителей',
+    sendEmailCodeAgain: 'Выслать код повторно',
+    sentMessageToPhone: 'На указанный Вами номер {phoneFormatted} отправлено СМС-сообщение',
     title: 'Вход в систему',
   },
   column: {
@@ -72,11 +73,11 @@ export default {
     404: 'Не найдено',
   },
   field: {
-    loginPhoneNumber: 'Логин (номер телефона)',
+    codeConfirm: 'Код подтверждения',
     password: 'Пароль',
+    phone: 'Номер телефона',
     phoneNumber: 'Номер телефона ({countNumbers} цифр)',
     showHidePassword: 'Показать/скрыть пароль',
-    smsCode: 'Смс-код',
   },
   loader: {
     pleaseWait: 'Пожалуйста ожидайте...',

@@ -6,7 +6,7 @@ use App\Entities\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-class AuthSmsCode extends Model
+class AuthEmailCode extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -73,18 +73,19 @@ class AuthSmsCode extends Model
 
     public static function generateNumber(): int
     {
-        return mt_rand(config('auth.sms_code.min_number'), config('auth.sms_code.max_number'));
+        return mt_rand(config('validation.email_code.min_number'), config('validation.email_code.max_number'));
     }
 
-    public function isExpired(): bool
+    public function isExpiredTimeout(): bool
     {
         $dateExpiration = Carbon::parse($this->created_at)
-            ->addSeconds(config('auth.sms_code.timeout'));
+            ->addSeconds(config('auth.email_code.timeout'));
         return $dateExpiration < Carbon::now();
     }
 
-    public function timeout(): int {
+    public function timeout(): int
+    {
         $created_at = Carbon::parse($this->created_at);
-        return config('auth.sms_code.timeout') - $created_at->diffInSeconds(Carbon::now());
+        return config('auth.email_code.timeout') - $created_at->diffInSeconds(Carbon::now());
     }
 }

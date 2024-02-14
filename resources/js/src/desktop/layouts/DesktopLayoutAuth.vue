@@ -13,16 +13,10 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useAuthStore } from '@/stores/auth'
 import DesktopAuthFooter from '@/desktop/components/layouts/auth/DesktopAuthFooter.vue'
 import DesktopAuthHeader from '@/desktop/components/layouts/auth/DesktopAuthHeader.vue'
 import DesktopAuthTitle from '@/desktop/components/layouts/auth/DesktopAuthTitle.vue'
 import DesktopAuthTypeToggle from '@/desktop/components/layouts/auth/DesktopAuthTypeToggle.vue'
-
-const authStore = useAuthStore()
-
-onMounted(authStore.fetchCompanyCounters)
 </script>
 
 <style lang="sass" scoped>

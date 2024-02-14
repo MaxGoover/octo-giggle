@@ -1,11 +1,11 @@
 export default {
   STEP: {
-    BY_SMS_FORM: 'stepBySmsForm',
-    BY_SMS_CONFIRM: 'stepBySmsConfirm',
-    BY_PASSWORD_FORM: 'stepByPasswordForm',
+    BY_EMAIL_FORM: 'stepByEmailForm',
+    BY_EMAIL_CONFIRM: 'stepByEmailConfirm',
+    BY_PHONE_FORM: 'stepByPhoneForm',
   },
   TYPE: {
-    BY_PASSWORD: 'typeByPassword',
-    BY_SMS: 'typeBySms',
+    BY_EMAIL: 'typeByEmail',
+    BY_PHONE: 'typeByPhone',
   },
 }

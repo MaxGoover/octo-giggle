@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <!--Логин (номер телефона)-->
+    <!--Номер телефона-->
     <q-input
-      v-model="phone"
+      v-model="authStore.phoneFormatted"
       class="col-12"
       bg-color="white"
       clear-icon="close"
@@ -12,14 +12,14 @@
       no-error-icon
       outlined
       type="tel"
-      :label="$t('field.loginPhoneNumber')"
+      :label="$t('field.phone')"
       :mask="VALIDATION.phone.formatted.mask"
-      :title="$t('field.loginPhoneNumber')"
+      :title="$t('field.phone')"
     />
 
     <!--Пароль-->
     <q-input
-      v-model="password"
+      v-model="authStore.password"
       class="col-12 q-mt-md"
       bg-color="white"
       clear-icon="close"
@@ -60,7 +60,10 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-xs">
-      <q-btn class="full-width h-56 action-button action-button--primary">
+      <q-btn
+        class="full-width h-56 action-button action-button--primary"
+        @click="authStore.authByPhoneConfirm"
+      >
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>
@@ -84,8 +87,6 @@ const ICONS = inject('ICONS')
 const VALIDATION = inject('VALIDATION')
 
 const isShowedPassword = ref(false)
-const password = ref('')
-const phone = ref('')
 
 const passwordFieldType = computed(() => (isShowedPassword.value ? 'text' : 'password'))
 const passwordToggleShowIcon = computed(() =>
@@ -97,8 +98,8 @@ const toggleShowPassword = () => {
 }
 
 onMounted(() => {
-  authStore.setAuthType(AUTH.TYPE.BY_PASSWORD)
-  authStore.setStep(AUTH.STEP.BY_PASSWORD_FORM)
+  authStore.setAuthType(AUTH.TYPE.BY_PHONE)
+  authStore.setStep(AUTH.STEP.BY_PHONE_FORM)
 })
 </script>
 

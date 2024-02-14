@@ -5,23 +5,17 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'email_code' => [
+        'expires' => 3600, // (сек)
+        'timeout' => 5, // (сек)
+    ],
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
     ],
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Entities\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
+    'password_timeout' => 10800,
     'passwords' => [
         'users' => [
             'provider' => 'users',
@@ -30,11 +24,10 @@ return [
             'throttle' => 60,
         ],
     ],
-    'password_timeout' => 10800,
-    'sms_code' => [
-        'expires' => 3600, // (сек)
-        'min_number' => 11111,
-        'max_number' => 99999,
-        'timeout' => 10, // (сек)
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Entities\User::class,
+        ],
     ],
 ];

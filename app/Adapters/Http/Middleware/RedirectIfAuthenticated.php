@@ -2,7 +2,7 @@
 
 namespace App\Adapters\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use App\Adapters\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +20,7 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            // если пользователь авторизован
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }

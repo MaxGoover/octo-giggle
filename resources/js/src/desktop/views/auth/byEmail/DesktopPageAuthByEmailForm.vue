@@ -41,7 +41,7 @@
     <div class="col-12 mt-40">
       <q-btn
         class="full-width h-56 action-button action-button--primary"
-        @click="authStore.fetchSmsCode"
+        @click="authStore.fetchEmailCode"
       >
         <span>{{ $t('action.receiveCode') }}</span>
       </q-btn>
@@ -65,8 +65,8 @@ const CONFIG = inject('CONFIG')
 const VALIDATION = inject('VALIDATION')
 
 onMounted(() => {
-  authStore.setAuthType(AUTH.TYPE.BY_SMS)
-  authStore.setStep(AUTH.STEP.BY_SMS_FORM)
+  authStore.setAuthType(AUTH.TYPE.BY_EMAIL)
+  authStore.setStep(AUTH.STEP.BY_EMAIL_FORM)
 })
 </script>
 

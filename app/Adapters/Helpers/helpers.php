@@ -1,7 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\isEmpty;
-
 if (!function_exists('escape_search')) {
     /**
      * Очищает строку от ненужных символов для поиска.
@@ -76,11 +74,5 @@ if (!function_exists('format_phone')) {
     function format_phone($phone)
     {
         return '+7 (' . substr($phone, 0, 3) . ') ' . substr($phone, 3, 3) . '-' . substr($phone, 6, 2) . '-' . substr($phone, 8, 2);
-    }
-}
-
-if (!function_exists('is_empty')) {
-    function is_empty(mixed $value) {
-        return isEmpty($value);
     }
 }

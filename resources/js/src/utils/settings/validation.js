@@ -10,6 +10,10 @@ export default {
   },
   email: {
     maxLength: 254,
+    code: {
+        mask: '######',
+        minLength: 6,
+    },
   },
   inn: {
     minLength: 10,
@@ -35,10 +39,6 @@ export default {
       minLength: 18,
     },
     length: 10,
-  },
-  smsCode: {
-    mask: '#####',
-    minLength: 5,
   },
   time: {
     format: 'HH:mm',

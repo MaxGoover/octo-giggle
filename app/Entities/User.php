@@ -2,7 +2,6 @@
 
 namespace App\Entities;
 
-use App\Entities\AuthSmsCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,10 +21,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'email',
+        'first_name',
+        'last_name',
+        'password',
         'phone',
-        'active',
-        'last_online',
-        'api_token',
     ];
 
     /**
@@ -33,7 +33,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = ['api_token'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     /**
      * The attributes that should be mutated to dates.
@@ -41,10 +44,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
-        'last_online',
         'created_at',
-        'updated_at',
         'deleted_at',
+        'email_verified_at',
+        'updated_at',
     ];
 
     /**
@@ -53,22 +56,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'active' => 'boolean',
+        'email_verified_at' => 'datetime',
+        'owner' => 'boolean',
     ];
 
     /** Relations */
 
-    final function authSmsCodes()
+    final function authEmailCodes()
     {
-        return $this->hasMany(AuthSmsCode::class);
+        return $this->hasMany(AuthEmailCode::class);
     }
 
     /** Scopes */
-
-    public function scopeActive($query)
-    {
-        return $query->where('active', true);
-    }
 
     public function scopePhone($query, string $phone)
     {
@@ -79,27 +78,38 @@ class User extends Authenticatable
 
     public static function findActiveById(int $id): ?self
     {
-        return self::active()->where('id', $id)->first();
+        return self::where('id', $id)->first();
     }
 
     public static function findActiveByPhone(string $phone): ?self
     {
-        return self::active()->where('phone', $phone)->first();
+        return self::where('phone', $phone)->first();
     }
 
     /** Logic */
 
-    public static function generateToken(): string
+    public static function isDeletedByPhone($phone): bool
+    {
+        return self::onlyTrashed()->where('phone', $phone)->exists();
+    }
+
+    public function generateToken(): string
     {
         $token = null;
         do {
             $token = Str::random(config('settings.user.api_token_length'));
-        } while (self::where('api_token', $token)->exists());
+        } while ($this->where('api_token', $token)->exists());
 
         return hash('sha256', $token);
     }
 
-    public static function isDeletedByPhone($phone): bool {
-        return self::onlyTrashed()->where('phone', $phone)->exists();
+    public function forgetToken()
+    {
+        $this->update(['api_token' => null]);
+    }
+
+    public function refreshToken()
+    {
+        $this->update(['api_token' => $this->generateToken()]);
     }
 }

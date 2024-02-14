@@ -2,7 +2,7 @@
   <div class="row">
     <!--Смс-код-->
     <q-input
-      v-model="smsCode"
+      v-model="emailCode.code"
       class="col-12"
       bg-color="white"
       clear-icon="close"
@@ -11,8 +11,8 @@
       label-color="grey-7"
       no-error-icon
       outlined
-      :label="$t('field.smsCode')"
-      :title="$t('field.smsCode')"
+      :label="$t('field.emailCode')"
+      :title="$t('field.emailCode')"
     />
 
     <!--Принятие соглашений-->
@@ -30,7 +30,7 @@
     <q-btn
       class="q-mt-sm full-width h-56 action-button action-button--secondary"
       :disable="!timer.isTimeUp.value"
-      @click="authStore.fetchSmsCode"
+      @click="authStore.fetchEmailCode"
     >
       <ComponentIcon
         class="q-mr-md"
@@ -51,7 +51,7 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-lg">
-      <q-btn class="full-width h-56 action-button action-button--primary" @click="authStore.authBySms">
+      <q-btn class="full-width h-56 action-button action-button--primary" @click="authStore.authByEmailCode">
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>
@@ -73,13 +73,12 @@ defineOptions({
 })
 
 const authStore = useAuthStore()
-const { smsCode, smsCodeTimeout } = storeToRefs(authStore)
+const { emailCode, emailCodeTimeout } = storeToRefs(authStore)
 
 const ICONS = inject('ICONS')
-
 const { getPaletteColor } = colors
 
-const timer = useTimerCountdown(smsCodeTimeout)
+const timer = useTimerCountdown(emailCodeTimeout)
 </script>
 
 <style lang="sass" scoped>

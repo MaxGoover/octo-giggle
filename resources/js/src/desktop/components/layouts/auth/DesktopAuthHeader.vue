@@ -2,12 +2,7 @@
   <div class="auth-header">
     <q-item class="company-logo">
       <q-item-section avatar>
-        <ComponentIcon
-          class="company-logo-icon"
-          :height="58"
-          :name="ICONS.LOGO"
-          :width="57"
-        >
+        <ComponentIcon class="company-logo-icon" :height="58" :name="ICONS.LOGO" :width="57">
           <IconLogo />
         </ComponentIcon>
       </q-item-section>
@@ -24,10 +19,10 @@
     <q-item class="company-counters">
       <q-item-section class="company-counters-text">
         <q-item-label class="company-counters-text__primary">
-          <span>342177</span>
+          <span>{{ page.props.counter.workers }}</span>
         </q-item-label>
         <q-item-label class="company-counters-text__secondary">
-          <span>исполнителей</span>
+          <span>{{ $t('auth.ofWorkers') }}</span>
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -35,10 +30,10 @@
     <q-item class="company-counters">
       <q-item-section class="company-counters-text">
         <q-item-label class="company-counters-text__primary">
-          <span>2055</span>
+          <span>{{ page.props.counter.customers }}</span>
         </q-item-label>
         <q-item-label class="company-counters-text__secondary">
-          <span>заказчиков</span>
+          <span>{{ $t('auth.ofCustomers') }}</span>
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -47,9 +42,11 @@
 
 <script setup>
 import { inject } from 'vue'
+import { usePage } from '@inertiajs/vue3'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconLogo from '@/assets/icons/IconLogo.vue'
 
+const page = usePage()
 const ICONS = inject('ICONS')
 </script>
 

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auth_sms_codes', function (Blueprint $table) {
+        Schema::create('auth_email_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('code');
             $table->boolean('active')->default(1);
             $table->timestamps();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('auth_sms_code');
+        Schema::dropIfExists('auth_email_codes');
     }
 };

@@ -22,6 +22,14 @@ export default function useTimerCountdown(durationValue) {
   })
 
   /**
+   * Очищает длительность таймера
+   * @returns {void}
+   */
+  const clearDuration = () => {
+    duration.value = 0
+  }
+
+  /**
    * Убавляет таймер на одну секунду
    * @returns {void}
    */
@@ -34,8 +42,8 @@ export default function useTimerCountdown(durationValue) {
    * @returns {void}
    */
   const reset = () => {
-    const time = helpersDateTime.formatTimeToMinutesSeconds(duration.value)
     remaining.value = duration.value
+    const time = helpersDateTime.formatTimeToMinutesSeconds(remaining.value)
     minutes.value = time.split(':')[0]
     seconds.value = time.split(':')[1]
   }
@@ -91,15 +99,22 @@ export default function useTimerCountdown(durationValue) {
    */
   watch(isTimeUp, (newValue) => {
     if (newValue) {
+      //   clearDuration()
       stop()
     }
   })
 
-  watch(duration, () => {
-    console.log('duration', duration)
-    reset()
-    start()
-  })
+  watch(
+    duration,
+    async () => {
+      console.log('duration', duration)
+      reset()
+      start()
+    },
+    {
+      deep: true,
+    },
+  )
 
   return {
     isTimeUp,
