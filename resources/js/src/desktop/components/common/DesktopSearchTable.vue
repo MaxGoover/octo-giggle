@@ -4,8 +4,9 @@
     bg-color="white"
     clear-icon="mdi-close"
     clearable
-    color="black"
+    color="blue-grey-1"
     dense
+    label-color="grey-7"
     no-error-icon
     outlined
     rounded
@@ -13,17 +14,13 @@
     :placeholder="placeholder"
   >
     <template #prepend>
-      <ComponentIcon :height="16" :name="ICONS.SEARCH" :width="16">
-        <IconSearch />
-      </ComponentIcon>
+      <q-icon color="grey-6" name="mdi-magnify" size="22px" />
     </template>
   </q-input>
 </template>
 
 <script setup>
 import { inject, ref } from 'vue'
-import ComponentIcon from '@/components/ComponentIcon.vue'
-import IconSearch from '@/assets/icons/IconSearch.vue'
 
 defineProps({
   placeholder: {
@@ -33,35 +30,7 @@ defineProps({
 })
 
 const CONFIG = inject('CONFIG')
-const ICONS = inject('ICONS')
 const search = ref(null)
-
-// export default {
-//   name: 'DesktopSearchTable',
-//   components: {
-//     ComponentIcon,
-//     IconSearch,
-//   },
-//   props: {
-//     placeholder: {
-//       type: String,
-//       required: false,
-//     },
-//   },
-//   data() {
-//     return {
-//       value: null,
-//     }
-//   },
-//   emits: ['search'],
-//   methods: {
-//     ...mapActions(usePaginationStore, ['setPaginationSearch']),
-//     search() {
-//       this.setPaginationSearch(this.value)
-//       this.$emit('search')
-//     },
-//   },
-// }
 </script>
 
 <style lang="sass" scoped>

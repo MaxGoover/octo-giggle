@@ -76,3 +76,15 @@ if (!function_exists('format_phone')) {
         return '+7 (' . substr($phone, 0, 3) . ') ' . substr($phone, 3, 3) . '-' . substr($phone, 6, 2) . '-' . substr($phone, 8, 2);
     }
 }
+
+if (!function_exists('mb_trim')) {
+    /**
+     * Убирает пробелы в начале и конце строки.
+     * @param $string
+     * @return ?string
+     */
+    function mb_trim(string $string): ?string
+    {
+        return preg_replace("/^\s+|\s+$/u", '', $string);
+    }
+}

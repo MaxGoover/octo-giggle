@@ -21,16 +21,8 @@
       <q-space />
 
       <!--Расширенные настройки фильтра-->
-      <q-btn flat round>
-        <ComponentIcon
-          :color-stroke="getPaletteColor('indigo-3')"
-          :height="20"
-          :name="ICONS.COG"
-          :width="20"
-          @click="commonStore.showTableSettingsModal"
-        >
-          <IconCog />
-        </ComponentIcon>
+      <q-btn flat round @click="workersStore.showWorkersTableSettingsModal">
+        <q-icon color="grey-6" name="mdi-cog-outline" size="20px" />
       </q-btn>
     </template>
 
@@ -82,14 +74,11 @@
 </template>
 
 <script setup>
-import { colors } from 'quasar'
-import { inject } from 'vue'
 import { paginationLabel } from '@/utils/helpers/table'
 import { useCommonStore } from '@/stores/common'
 import { usePaginationStore } from '@/stores/pagination'
-import ComponentIcon from '@/components/ComponentIcon.vue'
+import { useWorkersStore } from '@/stores/workers'
 import DesktopFilterTable from '@/desktop/components/common/DesktopFilterTable.vue'
-import IconCog from '@/assets/icons/IconCog.vue'
 
 defineProps({
   columns: {
@@ -102,10 +91,9 @@ defineProps({
   },
 })
 
-const { getPaletteColor } = colors
-const ICONS = inject('ICONS')
 const commonStore = useCommonStore()
 const paginationStore = usePaginationStore()
+const workersStore = useWorkersStore()
 </script>
 
 <style lang="sass" scoped>

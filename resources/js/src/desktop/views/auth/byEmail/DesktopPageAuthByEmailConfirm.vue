@@ -30,17 +30,10 @@
     <q-btn
       class="q-mt-sm full-width h-56 action-button action-button--secondary"
       :disable="!timer.isTimeUp.value"
+      :title="$t('auth.sendCodeAgain')"
       @click="authStore.fetchEmailCode"
     >
-      <ComponentIcon
-        class="q-mr-md"
-        :color-stroke="getPaletteColor('primary')"
-        :height="24"
-        :name="ICONS.ARROWS_SYNCHRONIZE"
-        :width="24"
-      >
-        <IconArrowsSynchronize />
-      </ComponentIcon>
+      <q-icon color="primary" name="mdi-sync" size="30px" />
       <span>{{
         $t('auth.mightRepeatAfter', {
           timerMinutes: timer.minutes.value,
@@ -51,7 +44,7 @@
 
     <!--Войти в систему-->
     <div class="col-12 q-mt-lg">
-      <q-btn class="full-width h-56 action-button action-button--primary" @click="authStore.authByEmailCode">
+      <q-btn class="full-width h-56 action-button action-button--primary" @click="authStore.signInByEmailCode">
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>
     </div>
@@ -63,9 +56,7 @@ import { colors } from 'quasar'
 import { inject } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
-import ComponentIcon from '@/components/ComponentIcon.vue'
 import DesktopLayoutAuth from '@/desktop/layouts/DesktopLayoutAuth.vue'
-import IconArrowsSynchronize from '@/assets/icons/IconArrowsSynchronize.vue'
 import useTimerCountdown from '@/composables/useTimerCountdown'
 
 defineOptions({

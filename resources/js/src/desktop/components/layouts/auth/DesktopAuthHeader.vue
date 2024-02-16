@@ -2,7 +2,7 @@
   <div class="auth-header">
     <q-item class="company-logo">
       <q-item-section avatar>
-        <ComponentIcon class="company-logo-icon" :height="58" :name="ICONS.LOGO" :width="57">
+        <ComponentIcon class="company-logo-icon" :height="48" :name="ICONS.LOGO" :width="152">
           <IconLogo />
         </ComponentIcon>
       </q-item-section>
@@ -15,38 +15,14 @@
         </q-item-label>
       </q-item-section>
     </q-item>
-
-    <q-item class="company-counters">
-      <q-item-section class="company-counters-text">
-        <q-item-label class="company-counters-text__primary">
-          <span>{{ page.props.counter.workers }}</span>
-        </q-item-label>
-        <q-item-label class="company-counters-text__secondary">
-          <span>{{ $t('auth.ofWorkers') }}</span>
-        </q-item-label>
-      </q-item-section>
-    </q-item>
-
-    <q-item class="company-counters">
-      <q-item-section class="company-counters-text">
-        <q-item-label class="company-counters-text__primary">
-          <span>{{ page.props.counter.customers }}</span>
-        </q-item-label>
-        <q-item-label class="company-counters-text__secondary">
-          <span>{{ $t('auth.ofCustomers') }}</span>
-        </q-item-label>
-      </q-item-section>
-    </q-item>
   </div>
 </template>
 
 <script setup>
 import { inject } from 'vue'
-import { usePage } from '@inertiajs/vue3'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import IconLogo from '@/assets/icons/IconLogo.vue'
 
-const page = usePage()
 const ICONS = inject('ICONS')
 </script>
 
@@ -64,6 +40,12 @@ const ICONS = inject('ICONS')
     padding-top: 7vh
 .company
   &-logo
+    &-icon
+      background-color: #0D3585
+      border-radius: 5px
+      padding: 10px
+      height: 58px
+
     &-text
       color: $grey-9
 
@@ -75,22 +57,5 @@ const ICONS = inject('ICONS')
       &__secondary
         font-size: 14px
         font-weight: 600
-        line-height: 18px !important
-
-  &-counters
-    margin-left: 16px
-
-    &-text
-      color: $grey-6
-
-      &__primary
-        font-size: 28px
-        font-weight: 500
-        line-height: 32px !important
-        margin-top: 4px
-
-      &__secondary
-        font-size: 12px
-        font-weight: 400
         line-height: 18px !important
 </style>

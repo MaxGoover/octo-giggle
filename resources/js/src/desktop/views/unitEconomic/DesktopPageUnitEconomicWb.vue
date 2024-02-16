@@ -1,71 +1,57 @@
 <template>
   <div>
     <!--Лоадер-->
-    <q-inner-loading
-      v-if="commonStore.isShowedLoader"
-      showing
-      :label="$t('loader.pleaseWait')"
-    />
+    <q-inner-loading v-if="commonStore.isShowedLoader" showing :label="$t('loader.pleaseWait')" />
 
     <template v-else>
-      <div class="row justify-between">
+      <div class="row justify-between q-mt-sm">
         <!--Заголовок-->
-        <DesktopTitle :text="$t('title.workers')" />
+        <DesktopTitle :text="$t('title.unitEconomic.wb')" />
 
         <div class="row justify-end">
           <!--Поиск-->
-          <DesktopSearchTable
-            class="workers-search"
-            :placeholder="$t('search.byFioPhoneInn')"
-          />
+          <DesktopSearchTable class="workers-search" :placeholder="$t('search.byName')" />
 
           <!--Добавить работника-->
-          <q-btn
-            class="q-ml-md action-button action-button--primary"
-            flat
-            no-caps
-          >
-            <ComponentIcon
-              :color-stroke="getPaletteColor('grey-1')"
-              :height="16"
-              :name="ICONS.USER_ADD"
-              :width="16"
-            >
-              <IconUserAdd />
-            </ComponentIcon>
-            <span class="q-ml-sm">{{ $t('action.addWorker') }}</span>
+          <q-btn class="q-ml-md action-button action-button--primary" flat no-caps>
+            <q-icon color="grey-1" name="mdi-package-variant-closed-plus" size="22px" />
+            <span class="q-ml-sm">{{ $t('action.addProduct') }}</span>
           </q-btn>
         </div>
       </div>
 
       <!--Таблица-->
       <div class="q-mt-md">
-        <DesktopWorkersTable
-          :columns="columns"
-          :rows="[]"
-        />
+        <DesktopWorkersTable :columns="columns" :rows="[]" />
       </div>
+
+      <!--Настройки таблицы-->
+      <DesktopTableSettingsModal
+        :filters="workersStore.filters"
+        :hideModal="workersStore.hideWorkersTableSettingsModal"
+        :isShowed="workersStore.isShowedWorkersTableSettingsModal"
+      />
     </template>
   </div>
 </template>
 
 <script setup>
-import { colors } from 'quasar'
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import { useCommonStore } from '@/stores/common'
-import ComponentIcon from '@/components/ComponentIcon.vue'
+import { useWorkersStore } from '@/stores/workers'
 import DesktopLayoutDashboard from '@/desktop/layouts/DesktopLayoutDashboard.vue'
 import DesktopSearchTable from '@/desktop/components/common/DesktopSearchTable.vue'
+import DesktopTableSettingsModal from '@/desktop/components/common/DesktopTableSettingsModal.vue'
 import DesktopTitle from '@/desktop/components/common/DesktopTitle.vue'
 import DesktopWorkersTable from '@/desktop/components/pages/workers/DesktopWorkersTable.vue'
-import IconUserAdd from '@/assets/icons/IconUserAdd.vue'
 
 defineOptions({
   layout: DesktopLayoutDashboard,
 })
 
-const { getPaletteColor } = colors
-const ICONS = inject('ICONS')
+const commonStore = useCommonStore()
+const workersStore = useWorkersStore()
+
 const columns = ref([
   {
     align: 'left',
@@ -89,8 +75,6 @@ const columns = ref([
     sortable: true,
   },
 ])
-
-const commonStore = useCommonStore()
 </script>
 
 <style lang="sass" scoped>

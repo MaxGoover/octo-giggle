@@ -1,13 +1,4 @@
 /**
- * Делает первую букву строки - заглавной
- * Например: 'addToList' -> 'AddToList'
- *
- * @param {string} iconName
- */
-export const capitalizeFirstLetter = (iconName) =>
-  iconName[0].toUpperCase() + iconName.slice(1)
-
-/**
  * Очищает номер мобильного телефона от символов, оставляя только цифры
  * @example '+7 (927) 122-69-62' -> '9271226962'
  * @param {string} phone

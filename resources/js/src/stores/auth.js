@@ -22,44 +22,6 @@ export const useAuthStore = defineStore('auth', {
   getters: {},
 
   actions: {
-    async authByEmailCode() {
-      console.log('authByEmailCode')
-
-      return router.post(
-        ROUTES.AUTH.BY_EMAIL_CONFIRM,
-        {
-          emailCode: this.emailCode,
-          phoneFormatted: this.phoneFormatted,
-        },
-        {
-          onSuccess: (response) => {},
-          onError: (errors) => {
-            console.error(errors)
-            notify.error(Object.values(errors)[0])
-          },
-        },
-      )
-    },
-    async authByPhoneConfirm() {
-      console.log('authByPhoneConfirm')
-
-      return router.post(
-        ROUTES.AUTH.BY_PHONE_CONFIRM,
-        {
-          password: this.password,
-          phoneFormatted: this.phoneFormatted,
-        },
-        {
-          onSuccess: (response) => {
-            console.log('response', response)
-          },
-          onError: (errors) => {
-            console.error(errors)
-            notify.error(Object.values(errors)[0])
-          },
-        },
-      )
-    },
     // Получает код для авторизации
     async fetchEmailCode() {
       console.log('fetchEmailCode')
@@ -78,6 +40,64 @@ export const useAuthStore = defineStore('auth', {
             // костыль
             this.clearEmailCodeTimeout()
             this.setEmailCodeTimeout(response.props.emailCode.timeout)
+          },
+          onError: (errors) => {
+            console.error(errors)
+            notify.error(Object.values(errors)[0])
+          },
+        },
+      )
+    },
+    async signInByEmailCode() {
+      console.log('signInByEmailCode')
+
+      return router.post(
+        ROUTES.AUTH.BY_EMAIL_CONFIRM,
+        {
+          emailCode: this.emailCode,
+          phoneFormatted: this.phoneFormatted,
+        },
+        {
+          onSuccess: (response) => {},
+          onError: (errors) => {
+            console.error(errors)
+            notify.error(Object.values(errors)[0])
+          },
+        },
+      )
+    },
+    async signInByPhone() {
+      console.log('signInByPhone')
+
+      return router.post(
+        ROUTES.AUTH.BY_PHONE_CONFIRM,
+        {
+          password: this.password,
+          phoneFormatted: this.phoneFormatted,
+        },
+        {
+          onSuccess: (response) => {
+            console.log('response', response)
+          },
+          onError: (errors) => {
+            console.error(errors)
+            notify.error(Object.values(errors)[0])
+          },
+        },
+      )
+    },
+    async signOut() {
+      console.log('signOut')
+
+      return router.delete(
+        ROUTES.AUTH.SIGN_OUT,
+        {
+          password: this.password,
+          phoneFormatted: this.phoneFormatted,
+        },
+        {
+          onSuccess: (response) => {
+            console.log('response', response)
           },
           onError: (errors) => {
             console.error(errors)

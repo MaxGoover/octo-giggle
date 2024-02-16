@@ -22,7 +22,6 @@ final class AuthByEmailFormAction extends Controller
         ]);
 
         $phone = clear_phone(Request::get('phoneFormatted'));
-
         $user = FindUserByPhoneQuery::handle($phone);
         if (is_null($user)) {
             return Redirect::back()->withErrors([

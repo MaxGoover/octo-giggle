@@ -6,8 +6,8 @@ export default {
   },
   auth: {
     link: {
-      privacyPolicy: 'https://legal.handswork.pro/privacy-policy',
-      userAgreement: 'https://legal.handswork.pro/user-agreement',
+      privacyPolicy: 'https://mpfact.ru/privacy',
+      userAgreement: 'https://mpfact.ru/legal',
     },
     timer: {
       duration: 3, // (сек) до возможности получения нового СМС-кода для авторизации
@@ -20,7 +20,7 @@ export default {
   menu: {
     leftDrawer: {
       width: {
-        desktop: 58, // (рх)
+        desktop: 64, // (рх)
         mobile: 300,
       },
     },

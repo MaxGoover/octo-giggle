@@ -62,7 +62,7 @@
     <div class="col-12 q-mt-xs">
       <q-btn
         class="full-width h-56 action-button action-button--primary"
-        @click="authStore.authByPhoneConfirm"
+        @click="authStore.signInByPhone"
       >
         <span>{{ $t('action.enterSystem') }}</span>
       </q-btn>

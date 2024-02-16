@@ -7,13 +7,13 @@
     :mini-width="CONFIG.menu.leftDrawer.width.desktop"
   >
     <!--Список меню-->
-    <DesktopLeftDrawerList />
+    <DesktopDashboardLeftDrawerList />
   </q-drawer>
 </template>
 
 <script setup>
 import { inject } from 'vue'
-import DesktopLeftDrawerList from '@/desktop/components/layouts/dashboard/leftDrawer/DesktopDashboardLeftDrawerList.vue'
+import DesktopDashboardLeftDrawerList from '@/desktop/components/layouts/dashboard/leftDrawer/DesktopDashboardLeftDrawerList.vue'
 
 const CONFIG = inject('CONFIG')
 </script>

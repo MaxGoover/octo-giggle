@@ -86,6 +86,21 @@ class User extends Authenticatable
         return self::where('phone', $phone)->first();
     }
 
+    public function getNameAttribute(): string
+    {
+        return mb_trim($this->last_name . ' ' . $this->first_name);
+    }
+
+    public function getNameInitialsAttribute(): string
+    {
+        return Str::upper(mb_substr($this->last_name, 0, 1) . mb_substr($this->first_name, 0, 1));
+    }
+
+    public function getPhoneFormattedAttribute(): string
+    {
+        return format_phone($this->phone);
+    }
+
     /** Logic */
 
     public static function isDeletedByPhone($phone): bool
