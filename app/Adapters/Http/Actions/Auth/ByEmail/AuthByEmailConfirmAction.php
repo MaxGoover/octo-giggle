@@ -54,8 +54,5 @@ final class AuthByEmailConfirmAction extends Controller
         $request->session()->regenerate();
 
         return Redirect::intended(RouteServiceProvider::HOME);
-        // return Redirect::intended(RouteServiceProvider::HOME);
-        // return redirect()->intended(RouteServiceProvider::HOME);
-        // return Redirect::route('home');
     }
 }

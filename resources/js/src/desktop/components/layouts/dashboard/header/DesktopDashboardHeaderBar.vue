@@ -1,7 +1,7 @@
 <template>
   <q-header class="text-dark" reveal>
     <q-toolbar class="q-px-sm h-64">
-      <ComponentIcon :height="28" :name="ICONS.LOGO" :width="28">
+      <ComponentIcon class="company-logo2-icon" :height="28" :name="ICONS.LOGO" :width="88">
         <IconLogo2 />
       </ComponentIcon>
 
@@ -9,14 +9,10 @@
       <q-item class="q-pr-sm font-size-12">
         <q-item-section>
           <q-item-label>
-            <span class="text-grey-9"
-              >{{ $t('topToolbar.paymentBalance') }}:</span
-            >
+            <span class="text-grey-9">{{ $t('topToolbar.paymentBalance') }}:</span>
           </q-item-label>
           <q-item-label>
-            <span class="text-grey-6"
-              >{{ $t('topToolbar.commissionBalance') }}:</span
-            >
+            <span class="text-grey-6">{{ $t('topToolbar.commissionBalance') }}:</span>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -57,4 +53,11 @@ const ICONS = inject('ICONS')
 
 <style lang="sass" scoped>
 @import '@/css/buttons'
+.company
+  &-logo2
+    &-icon
+      background-color: #0D3585
+      border-radius: 5px
+      padding: 3px
+      height: 28px
 </style>

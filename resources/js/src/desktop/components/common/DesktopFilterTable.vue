@@ -27,15 +27,15 @@ defineProps({
 const filters = ref([
   {
     id: 1,
-    name: 'Дата регистрации',
+    name: 'Название',
   },
   {
     id: 2,
-    name: 'Город',
+    name: 'Стратегия',
   },
   {
     id: 3,
-    name: 'Гражданство',
+    name: 'Остаток WB, шт.',
   },
 ])
 </script>
