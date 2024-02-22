@@ -23,7 +23,7 @@ defineProps({
   },
 })
 
-const selectedFilter = ref(null)
+// const selectedFilter = ref(null)
 const filters = ref([
   {
     id: 1,

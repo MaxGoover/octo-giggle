@@ -8,6 +8,8 @@ use Illuminate\Support\Carbon;
 
 class AuthEmailCode extends Model
 {
+    protected $table = 'auth_email_codes';
+
     /**
      * The attributes that are mass assignable.
      *

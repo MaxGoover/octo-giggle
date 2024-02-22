@@ -22,14 +22,14 @@
 
       <!--Таблица-->
       <div class="q-mt-md">
-        <DesktopWorkersTable :columns="columns" :rows="[]" />
+        <DesktopUnitEconomicTable :columns="columns" :rows="[]" />
       </div>
 
       <!--Настройки таблицы-->
       <DesktopTableSettingsModal
-        :filters="workersStore.filters"
-        :hideModal="workersStore.hideWorkersTableSettingsModal"
-        :isShowed="workersStore.isShowedWorkersTableSettingsModal"
+        :filters="commonStore.tableFilters"
+        :hideModal="commonStore.hideTableSettingsModal"
+        :isShowed="commonStore.isShowedTableSettingsModal"
       />
     </template>
   </div>
@@ -38,40 +38,38 @@
 <script setup>
 import { ref } from 'vue'
 import { useCommonStore } from '@/stores/common'
-import { useWorkersStore } from '@/stores/workers'
 import DesktopLayoutDashboard from '@/desktop/layouts/DesktopLayoutDashboard.vue'
 import DesktopSearchTable from '@/desktop/components/common/DesktopSearchTable.vue'
 import DesktopTableSettingsModal from '@/desktop/components/common/DesktopTableSettingsModal.vue'
 import DesktopTitle from '@/desktop/components/common/DesktopTitle.vue'
-import DesktopWorkersTable from '@/desktop/components/pages/workers/DesktopWorkersTable.vue'
+import DesktopUnitEconomicTable from '@/desktop/components/pages/unitEconomic/DesktopUnitEconomicTable.vue'
 
 defineOptions({
   layout: DesktopLayoutDashboard,
 })
 
 const commonStore = useCommonStore()
-const workersStore = useWorkersStore()
 
 const columns = ref([
   {
     align: 'left',
-    field: 'createdDate',
-    label: 'Дата регистрации',
-    name: 'createdDate',
+    field: 'name',
+    label: 'Название',
+    name: 'name',
     sortable: true,
   },
   {
-    align: 'left',
-    field: 'partner',
-    label: 'Партнер',
-    name: 'partner',
+    align: 'center',
+    field: 'strategy',
+    label: 'Стратегия',
+    name: 'strategy',
     sortable: true,
   },
   {
-    align: 'left',
-    field: 'city',
-    label: 'Город',
-    name: 'city',
+    align: 'center',
+    field: 'remainder WB',
+    label: 'Остаток WB, шт.',
+    name: 'remainder WB',
     sortable: true,
   },
 ])

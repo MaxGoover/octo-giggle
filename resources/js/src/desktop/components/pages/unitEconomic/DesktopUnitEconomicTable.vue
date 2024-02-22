@@ -1,7 +1,7 @@
 <template>
   <q-table
     v-model:pagination="paginationStore.pagination"
-    class="my-sticky-header-table workers-table"
+    class="my-sticky-header-table products-table"
     flat
     row-key="id"
     separator="none"
@@ -9,7 +9,7 @@
     table-class="cursor-pointer"
     :columns="columns"
     :loading="commonStore.isShowedTableLoader"
-    :no-data-label="$t('table.noData.workers')"
+    :no-data-label="$t('table.noData.products')"
     :pagination-label="paginationLabel"
     :rows="rows"
     :rows-per-page-label="$t('table.rowsPerPage')"
@@ -21,7 +21,7 @@
       <q-space />
 
       <!--Расширенные настройки фильтра-->
-      <q-btn flat round @click="workersStore.showWorkersTableSettingsModal">
+      <q-btn flat round @click="commonStore.showTableSettingsModal">
         <q-icon color="grey-6" name="mdi-cog-outline" size="20px" />
       </q-btn>
     </template>
@@ -77,7 +77,6 @@
 import { paginationLabel } from '@/utils/helpers/table'
 import { useCommonStore } from '@/stores/common'
 import { usePaginationStore } from '@/stores/pagination'
-import { useWorkersStore } from '@/stores/workers'
 import DesktopFilterTable from '@/desktop/components/common/DesktopFilterTable.vue'
 
 defineProps({
@@ -93,11 +92,10 @@ defineProps({
 
 const commonStore = useCommonStore()
 const paginationStore = usePaginationStore()
-const workersStore = useWorkersStore()
 </script>
 
 <style lang="sass" scoped>
-.workers-table
+.products-table
   border-radius: 8px
   border: 1px solid $blue-grey-1
   box-shadow: 0px 0px 14px 0px #BCBCE64D

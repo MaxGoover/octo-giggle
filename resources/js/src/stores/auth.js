@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { router } from '@inertiajs/vue3'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import AUTH from '@/utils/consts/auth'
 import notify from '@/utils/helpers/notify'
 import ROUTES from '@/utils/consts/routes'

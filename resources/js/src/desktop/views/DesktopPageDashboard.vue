@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Добро пожаловать!</h4>
+    <h4 class="q-ml-xl">Добро пожаловать!</h4>
   </div>
 </template>
 

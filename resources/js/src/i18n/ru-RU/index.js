@@ -20,21 +20,21 @@ export default {
       'Осуществляя вход вы принимаете условия вы принимаете условия {linkUserAgreement} и {linkPrivacyPolicy} сервиса mpfact',
     agreeEmailCode: 'Для подтверждения, введите код авторизации в поле ниже',
     authorizationCode: 'Код авторизации из СМС',
+    dissatisfied: 'недовольных',
     doc: {
       privacyPolicy: 'политики конфиденциальности',
       userAgreement: 'пользовательского соглашения',
     },
-    dissatisfied: 'недовольных',
-    enterByPhone: 'Вход по номеру телефона',
     enterByEmail: 'Вход по почте',
+    enterByPhone: 'Вход по номеру телефона',
     logo: {
       companyName: 'Сервис оцифровки для селлеров',
       service: 'Инструменты для контроля бизнеса и принятия управленческих решений',
     },
     mightRepeatAfter: 'Повторить можно через {timerMinutes}:{timerSeconds}',
     satisfied: 'довольных',
+    sentEmailCode: 'На указанную Вами почту {email} отправлено сообщение с кодом',
     sendEmailCodeAgain: 'Выслать код повторно',
-    sentMessageToPhone: 'На указанный Вами номер {phoneFormatted} отправлено СМС-сообщение',
     title: 'Вход в систему',
   },
   column: {
@@ -88,7 +88,7 @@ export default {
   },
   table: {
     noData: {
-      workers: 'Исполнители не найдены',
+      products: 'Товары не найдены',
     },
     paginationInfo: '{endRowIndex} из {totalRowsNumber}',
     rowsPerPage: 'На странице',

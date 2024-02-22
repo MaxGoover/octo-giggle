@@ -8,6 +8,7 @@ use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneAction;
 use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneConfirmAction;
 use App\Adapters\Http\Actions\Dashboard\DashboardAction;
 use App\Adapters\Http\Actions\UnitEconomic\UnitEconomicWbAction;
+use App\Adapters\Http\Axios\Products\GetProductCategoriesAxios;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,3 +55,5 @@ Route::get('/', DashboardAction::class)
 Route::get('/unit-economic/wb', [UnitEconomicWbAction::class, 'handle']);
 Route::get('/unit-economic/ozon', [UnitEconomicWbAction::class, 'handle']);
 Route::get('/unit-economic/conditions-promotion-wb', [UnitEconomicWbAction::class, 'handle']);
+
+Route::get('/products/get-product-categories', GetProductCategoriesAxios::class);
