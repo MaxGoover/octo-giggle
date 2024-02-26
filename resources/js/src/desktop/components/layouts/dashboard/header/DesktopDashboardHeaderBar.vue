@@ -37,7 +37,13 @@
 
       <q-space />
 
-      <DesktopDashboardHeaderAccount />
+      <!--Уведомления-->
+      <q-btn flat round icon="mdi-bell-outline">
+        <!-- <q-badge color="red" floating rounded /> -->
+      </q-btn>
+
+      <!--Аккаунт-->
+      <DesktopDashboardHeaderAccount class="q-ml-md" />
     </q-toolbar>
   </q-header>
 </template>

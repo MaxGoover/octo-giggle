@@ -3,7 +3,6 @@
 namespace App\Adapters\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 
 class SignInByPhoneRequest extends FormRequest

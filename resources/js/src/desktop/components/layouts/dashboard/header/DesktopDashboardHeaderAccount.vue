@@ -1,6 +1,6 @@
 <template>
   <div class="account" :title="$t('account.menu.profile')">
-    <q-item class="q-px-none">
+    <q-item class="q-px-sm rounded-borders" clickable v-ripple>
       <q-item-section>
         <q-item-label>
           <span class="account__text account__text--primary">{{
@@ -91,8 +91,6 @@ const page = usePage()
 
 <style lang="sass" scoped>
 .account
-  cursor: pointer
-
   &__text
     display: block
     float: right

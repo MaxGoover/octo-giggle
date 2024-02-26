@@ -10,13 +10,49 @@
 
         <div class="row justify-end">
           <!--Поиск-->
-          <DesktopSearchTable class="workers-search" :placeholder="$t('search.byName')" />
+          <DesktopSearchTable class="products-search" :placeholder="$t('search.byName')" />
 
-          <!--Добавить работника-->
-          <q-btn class="q-ml-md action-button action-button--primary" flat no-caps>
+          <!--Добавить товар-->
+          <q-btn
+            class="q-ml-md action-button action-button--primary"
+            flat
+            no-caps
+            :title="$t('action.addProduct')"
+          >
             <q-icon color="grey-1" name="mdi-package-variant-closed-plus" size="22px" />
             <span class="q-ml-sm">{{ $t('action.addProduct') }}</span>
           </q-btn>
+
+          <!--Загрузить товары файлом-->
+          <q-file
+            v-model="productsStore.productsFile"
+            class="q-ml-md products-uploader"
+            accept=".csv"
+            bg-color="green-5"
+            color="grey-1"
+            dense
+            hide-bottom-space
+            label-color="grey-1"
+            no-error-icon
+            ref="productsFile"
+            standout
+            :label="$t('action.uploadByFile')"
+            :title="$t('action.uploadByFile')"
+          >
+            <template v-slot:prepend>
+              <q-icon color="grey-1" name="mdi-file-upload-outline" size="22px" />
+            </template>
+            <template v-slot:append>
+              <q-btn
+                color="grey-1"
+                dense
+                flat
+                icon="mdi-plus"
+                :title="$t('action.uploadFile')"
+                @click="productsStore.uploadProductsFile($refs.productsFile.modelValue)"
+              />
+            </template>
+          </q-file>
         </div>
       </div>
 
@@ -38,6 +74,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useCommonStore } from '@/stores/common'
+import { useProductsStore } from '@/stores/products'
 import DesktopLayoutDashboard from '@/desktop/layouts/DesktopLayoutDashboard.vue'
 import DesktopSearchTable from '@/desktop/components/common/DesktopSearchTable.vue'
 import DesktopTableSettingsModal from '@/desktop/components/common/DesktopTableSettingsModal.vue'
@@ -49,6 +86,7 @@ defineOptions({
 })
 
 const commonStore = useCommonStore()
+const productsStore = useProductsStore()
 
 const columns = ref([
   {
@@ -76,6 +114,18 @@ const columns = ref([
 </script>
 
 <style lang="sass" scoped>
-.workers-search
-  width: 432px
+.products
+  &-search
+    width: 432px
+  &-uploader
+    width: 214px
+// радиус поля загрузки файла
+:deep(.q-field__native > div)
+  color: $grey-1
+// радиус поля загрузки файла
+:deep(.q-field--standout .q-field__control)
+  border-radius: 8px
+// шрифт поля загрузки файлов
+:deep(.q-file)
+  font-family: Lato, sans-serif !important
 </style>

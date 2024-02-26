@@ -9,6 +9,10 @@ class ProductCategoriesSeeder extends Seeder
 {
     protected $processingStages = [
         [
+            'codename' => 'other',
+            'name' => 'Другое',
+        ],
+        [
             'codename' => 'home',
             'name' => 'Дом и сад',
         ],

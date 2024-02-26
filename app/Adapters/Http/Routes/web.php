@@ -9,6 +9,7 @@ use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneConfirmAction;
 use App\Adapters\Http\Actions\Dashboard\DashboardAction;
 use App\Adapters\Http\Actions\UnitEconomic\UnitEconomicWbAction;
 use App\Adapters\Http\Axios\Products\GetProductCategoriesAxios;
+use App\Adapters\Http\Axios\Products\UploadProductsAxios;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,13 +48,15 @@ Route::post('auth/by-phone-confirm', AuthByPhoneConfirmAction::class)
 Route::delete('auth/sign-out', [AuthSignOutAction::class, 'handle'])
     ->name('auth.sign_out');
 
+// dashboard
 Route::get('/', DashboardAction::class)
     ->name('home')
     ->middleware('auth');
 
 // unit economic
-Route::get('/unit-economic/wb', [UnitEconomicWbAction::class, 'handle']);
-Route::get('/unit-economic/ozon', [UnitEconomicWbAction::class, 'handle']);
-Route::get('/unit-economic/conditions-promotion-wb', [UnitEconomicWbAction::class, 'handle']);
+Route::get('/unit-economic/wb', [UnitEconomicWbAction::class, 'handle'])->middleware('auth');
+Route::get('/unit-economic/ozon', [UnitEconomicWbAction::class, 'handle'])->middleware('auth');
+Route::get('/unit-economic/conditions-promotion-wb', [UnitEconomicWbAction::class, 'handle'])->middleware('auth');
 
-Route::get('/products/get-product-categories', GetProductCategoriesAxios::class);
+Route::get('/products/get-product-categories', [GetProductCategoriesAxios::class])->middleware('auth');
+Route::post('/products/upload-products-file', [UploadProductsAxios::class, 'handle'])->middleware('auth');
