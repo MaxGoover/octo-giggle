@@ -75,19 +75,19 @@ class AuthEmailCode extends Model
 
     public static function generateNumber(): int
     {
-        return mt_rand(config('validation.email_code.min_number'), config('validation.email_code.max_number'));
+        return mt_rand(config('auth.email_code.between.min'), config('auth.email_code.between.max'));
     }
 
     public function isExpiredTimeout(): bool
     {
         $dateExpiration = Carbon::parse($this->created_at)
-            ->addSeconds(config('auth.email_code.timeout'));
+            ->addSeconds(config('settings.auth.email_code.timeout'));
         return $dateExpiration < Carbon::now();
     }
 
     public function timeout(): int
     {
         $created_at = Carbon::parse($this->created_at);
-        return config('auth.email_code.timeout') - $created_at->diffInSeconds(Carbon::now());
+        return config('settings.auth.email_code.timeout') - $created_at->diffInSeconds(Carbon::now());
     }
 }

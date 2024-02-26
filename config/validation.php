@@ -1,15 +1,23 @@
 <?php
 
 return [
-    'email_code' => [
-        'min_number' => 11111,
-        'max_number' => 99999,
-    ],
-    'password' => [
-        'min_length' => 6,
-        'max_length' => 50,
+    'auth' => [
+        'email' => 'required|string|email',
+        'email_code' => [
+            'id' => 'required|integer',
+            'code' => 'required|integer|min:' . config('auth.email_code.number.min') . '|max:' . config('auth.email_code.number.max'),
+        ],
+        'password' => 'required|string|min:' . config('auth.password.length.min') . '|max:' . config('auth.password.length.max'),
     ],
     'phone' => [
         'max_length' => 20,
+    ],
+    'product' => [
+        // вынести названия полей в константы хелпера
+        'category_id' => 'required|integer',
+        'article' => 'required|string',
+        'name' => 'required|string',
+        'description' => 'nullable|string',
+        'amount' => 'required|integer',
     ],
 ];

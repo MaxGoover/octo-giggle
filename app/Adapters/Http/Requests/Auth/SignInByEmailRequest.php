@@ -25,14 +25,14 @@ class SignInByEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
-            'emailCode.id' => 'required|integer',
-            'emailCode.code' => 'required|integer|min:' . config('validation.email_code.min_number') . '|max:' . config('validation.email_code.max_number'),
+            'email' => config('validation.auth.email'),
+            'emailCode.id' => config('validation.auth.email_code.id'),
+            'emailCode.code' => config('validation.auth.email_code.code'),
         ];
     }
 
-
-    public function clearThrottleKey(): void {
+    public function clearThrottleKey(): void
+    {
         RateLimiter::clear($this->throttleKey());
     }
 

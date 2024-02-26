@@ -21,7 +21,7 @@ class SignInByPhoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|string|min:' . config('validation.password.min_length') . '|max:' . config('validation.password.max_length'),
+            'password' => config('validation.auth.password'),
             'phoneFormatted' => 'required|string|max:' . config('validation.phone.max_length'),
         ];
     }

@@ -6,13 +6,21 @@ return [
         'passwords' => 'users',
     ],
     'email_code' => [
-        'expires' => 3600, // (сек)
-        'timeout' => 5, // (сек)
+        'between' => [
+            'min' => 11111,
+            'max' => 99999,
+        ],
     ],
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+    ],
+    'password' => [
+        'length' => [
+            'min' => 6,
+            'max' => 50,
         ],
     ],
     'password_timeout' => 10800,
