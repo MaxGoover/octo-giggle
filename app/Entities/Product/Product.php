@@ -2,6 +2,7 @@
 
 namespace App\Entities\Product;
 
+use App\Adapters\Helpers\Product\ProductHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = ProductHelper::TABLE_NAME;
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +18,10 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'amount',
+        ProductHelper::AMOUNT,
+        ProductHelper::ARTICLE,
+        ProductHelper::DESCRIPTION,
+        ProductHelper::NAME,
     ];
 
     /**

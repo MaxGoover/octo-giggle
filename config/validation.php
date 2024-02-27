@@ -1,5 +1,7 @@
 <?php
 
+use App\Adapters\Helpers\Product\ProductHelper;
+
 return [
     'auth' => [
         'email' => 'required|string|email',
@@ -13,11 +15,10 @@ return [
         'max_length' => 20,
     ],
     'product' => [
-        // вынести названия полей в константы хелпера
-        'category_id' => 'required|integer',
-        'article' => 'required|string',
-        'name' => 'required|string',
-        'description' => 'nullable|string',
-        'amount' => 'required|integer',
+        ProductHelper::CATEGORY_ID => 'required|integer',
+        ProductHelper::ARTICLE => 'required|string',
+        ProductHelper::NAME => 'required|string',
+        ProductHelper::DESCRIPTION => 'nullable|string',
+        ProductHelper::AMOUNT => 'required|integer',
     ],
 ];

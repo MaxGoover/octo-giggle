@@ -76,9 +76,6 @@ export const useAuthStore = defineStore('auth', {
           phoneFormatted: this.phoneFormatted,
         },
         {
-          onSuccess: (response) => {
-            console.log('response', response)
-          },
           onError: (errors) => {
             console.error(errors)
             notify.error(Object.values(errors)[0])

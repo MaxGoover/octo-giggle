@@ -2,6 +2,8 @@
 
 namespace App\Entities\Product;
 
+use App\Adapters\Helpers\Product\ProductCategoryHelper;
+use App\Adapters\Helpers\Product\ProductHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +11,7 @@ class ProductCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'product_categories';
+    protected $table = ProductCategoryHelper::TABLE_NAME;
     public $timestamps = false;
 
     /**
@@ -18,14 +20,14 @@ class ProductCategory extends Model
      * @var array
      */
     protected $fillable = [
-        'codename',
-        'name',
+        ProductCategoryHelper::CODENAME,
+        ProductCategoryHelper::NAME,
     ];
 
     /** Relations */
 
     final function products()
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
+        return $this->hasMany(Product::class, ProductHelper::CATEGORY_ID, 'id');
     }
 }

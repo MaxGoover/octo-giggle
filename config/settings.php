@@ -8,6 +8,11 @@ return [
         ],
     ],
     'product' => [
+        'csvStorage' => [
+            'url' => [
+                'store' => '/products/csv',
+            ],
+        ],
         'parser' => [
             'count' => [
                 'firstRowsValidation' => 5, // кол-во строк, которые мы проверяем перед полной валидацией файла
