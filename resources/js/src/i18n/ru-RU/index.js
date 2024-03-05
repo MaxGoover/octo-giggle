@@ -49,6 +49,7 @@ export default {
   },
   field: {
     codeConfirm: 'Код подтверждения',
+    email: 'Электронная почта',
     password: 'Пароль',
     phone: 'Номер телефона',
     phoneNumber: 'Номер телефона ({countNumbers} цифр)',

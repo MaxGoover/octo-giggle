@@ -8,14 +8,15 @@ import ROUTES from '@/utils/consts/routes'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authType: AUTH.TYPE.BY_EMAIL,
-    password: '123456',
-    phoneFormatted: '+7 (903) 261-93-16',
+    email: 'maxgoover@gmail.com',
     emailCode: ref({
       id: null,
       code: null,
       timeout: null,
     }),
     emailCodeTimeout: null,
+    password: '123456',
+    phoneFormatted: '+7 (903) 261-93-16',
     step: AUTH.STEP.BY_EMAIL_FORM,
   }),
 

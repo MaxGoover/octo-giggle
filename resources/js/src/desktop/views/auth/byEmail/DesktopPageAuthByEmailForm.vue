@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <!--Номер телефона-->
+    <!--Электронная почта-->
     <q-input
-      v-model="authStore.phoneFormatted"
+      v-model="authStore.email"
       class="col-12"
       bg-color="white"
       clear-icon="close"
@@ -11,8 +11,8 @@
       label-color="grey-7"
       no-error-icon
       outlined
-      type="tel"
-      :mask="VALIDATION.phone.formatted.mask"
+      :label="$t('field.email')"
+      :title="$t('field.email')"
     />
 
     <!--Принятие соглашений-->
