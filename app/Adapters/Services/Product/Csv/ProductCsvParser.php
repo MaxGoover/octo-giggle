@@ -8,39 +8,44 @@ use App\Adapters\Helpers\Product\ProductHelper;
 use App\Adapters\Services\CsvParserInterface;
 use App\Entities\Product\ProductCategory;
 use Illuminate\Support\Facades\Validator;
-use Exception;
 
 final class ProductCsvParser implements CsvParserInterface
 {
-    private string $filePath;
-    private array $products = [];
+    private int    $_countExaminedLines = 0;
+    private string $_pathFile;
+    private bool   $_isProductAdded = false;
+    private array  $_products = [];
 
-    public function __construct(string $filePath)
+    public function __construct(string $pathFile)
     {
-        $this->filePath = $filePath;
+        $this->_pathFile = $pathFile;
     }
 
     public function examine(): void
     {
-        if (!$this->_isValidatedFirstRows()) {
-            throw new Exception('Не удалось распарсить файл');
-        }
-
         $productCategories = ProductCategory::pluck('id', 'name')->all();
-        $file = fopen($this->filePath, 'r');
+        $file = fopen($this->_pathFile, 'r');
 
         while (($line = fgetcsv($file)) !== false) {
+            if (!$this->_isCsvValidated()) {
+                break;
+            }
+
+            $productCategoryId = $productCategories[$line[1]] ?? $productCategories['Другое'];
             $product = [
-                ProductHelper::CATEGORY_ID => $productCategories[$line[1]] ?? reset($productCategories),
+                ProductHelper::CATEGORY_ID => $productCategoryId,
                 ProductHelper::ARTICLE => $line[2],
                 ProductHelper::NAME => $line[3],
-                ProductHelper::DESCRIPTION => $line[4],
+                ProductHelper::DESCRIPTION => $line[4] ?? null,
                 ProductHelper::AMOUNT => $line[5],
             ];
 
-            if ($this->_isValidated($product)) {
-                $this->products[] = $product;
+            if ($this->_isProductValidated($product)) {
+                $this->_addProduct($product);
+                $this->_isProductAdded = true;
             }
+
+            $this->_countExaminedLines++;
         }
 
         fclose($file);
@@ -48,42 +53,22 @@ final class ProductCsvParser implements CsvParserInterface
 
     public function getProducts(): array
     {
-        return $this->products;
+        return $this->_products;
     }
 
-    private function _isValidated(array $product): bool
+    private function _addProduct(array $product): void
+    {
+        $this->_products[] = $product;
+    }
+
+    private function _isCsvValidated(): bool
+    {
+        return $this->_countExaminedLines < config('settings.product.parser.count.firstRowsValidation') || $this->_isProductAdded;
+    }
+
+    private function _isProductValidated(array $product): bool
     {
         $validator = Validator::make($product, config('validation.product'));
         return !$validator->fails();
-    }
-
-    private function _isValidatedFirstRows(): bool
-    {
-        $productCategories = ProductCategory::pluck('id', 'name')->all();
-        $file = fopen($this->filePath, 'r');
-        $isValidated = false;
-        $product = [];
-
-        for ($i = 0; $i < config('settings.product.parser.count.firstRowsValidation'); $i++) {
-            if (($line = fgetcsv($file)) === false) {
-                continue;
-            }
-
-            $product = [
-                ProductHelper::CATEGORY_ID => $productCategories[$line[1]] ?? reset($productCategories),
-                ProductHelper::ARTICLE => $line[2],
-                ProductHelper::NAME => $line[3],
-                ProductHelper::DESCRIPTION => $line[4],
-                ProductHelper::AMOUNT => $line[5],
-            ];
-
-            if ($this->_isValidated($product)) {
-                $isValidated = true;
-                break;
-            }
-        }
-
-        fclose($file);
-        return $isValidated;
     }
 }

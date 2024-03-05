@@ -7,30 +7,22 @@ namespace App\Adapters\Services\Product\Csv;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class ProductCsvStorage
+final class ProductCsvStorage
 {
-    private UploadedFile $file;
-    private string $filePath = '';
-
-    public function __construct(UploadedFile $file)
+    public static function clearFile(string $filePath): bool
     {
-        $this->file = $file;
+        return Storage::disk('local')->delete($filePath);
     }
 
-    public function clearFile(): bool
+    public static function getFullFilePath(string $filePath)
     {
-        return Storage::disk('local')->delete($this->filePath);
+        return Storage::disk('local')->path($filePath);
     }
 
-    public function getFullFilePath()
+    public static function storeFile(UploadedFile $file): string
     {
-        return Storage::disk('local')->path($this->filePath);
-    }
-
-    public function storeFile(): void
-    {
-        $fileExtension = $this->file->getClientOriginalExtension();
+        $fileExtension = $file->getClientOriginalExtension();
         $fileName = uniqid() . '.' . $fileExtension;
-        $this->filePath = Storage::disk('local')->putFileAs(config('settings.product.csvStorage.url.store'), $this->file, $fileName);
+        return Storage::disk('local')->putFileAs(config('settings.product.csvStorage.url.store'), $file, $fileName);
     }
 }

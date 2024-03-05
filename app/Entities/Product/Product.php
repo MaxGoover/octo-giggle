@@ -20,6 +20,7 @@ class Product extends Model
     protected $fillable = [
         ProductHelper::AMOUNT,
         ProductHelper::ARTICLE,
+        ProductHelper::CATEGORY_ID,
         ProductHelper::DESCRIPTION,
         ProductHelper::NAME,
     ];

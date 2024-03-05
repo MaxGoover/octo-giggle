@@ -14,8 +14,8 @@ export default {
     goMain: 'На главную',
     receiveCode: 'Получить код',
     sendCodeAgain: 'Выслать код повторно',
+    sendFile: 'Отправить файл',
     uploadByFile: 'Загрузить файлом',
-    uploadFile: 'Загрузить файл',
   },
   auth: {
     agreeConditions:

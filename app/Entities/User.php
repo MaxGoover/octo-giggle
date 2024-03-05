@@ -28,6 +28,10 @@ class User extends Authenticatable
         'phone',
     ];
 
+    protected $guarded = [
+        'owner',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
