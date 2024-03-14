@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\UseCases\Auth;
 
-use App\Entities\AuthEmailCode;
+use App\Entities\Auth\AuthEmailCode;
+use App\Entities\Auth\AuthEmailCodeRepository;
 
 final class FindAuthEmailCodeByUserIdQuery
 {
     public static function handle(int $userId): ?AuthEmailCode
     {
-        $authEmailCode = AuthEmailCode::findActiveByUserId($userId);
+        $authEmailCode = AuthEmailCodeRepository::findActiveByUserId($userId);
         if (optional($authEmailCode)->isExpiredTimeout()) {
             return null;
         }

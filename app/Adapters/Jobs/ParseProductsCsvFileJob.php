@@ -2,9 +2,11 @@
 
 namespace App\Adapters\Jobs;
 
+use App\Adapters\Helpers\Notification\NotificationTypeHelper;
 use App\Adapters\Services\Product\Csv\ProductCsvParser;
 use App\Adapters\Services\Product\Csv\ProductCsvStorage;
 use App\Adapters\Services\Product\ProductStorage;
+use App\Entities\Notification\Notification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -41,5 +43,12 @@ class ParseProductsCsvFileJob implements ShouldQueue
         ProductCsvStorage::clearFile($this->_filePath);
         $products = $productCsvParser->getProducts();
         $this->_productStorage->createOrUpdate($products);
+        // создать NotificationRepository - в него складывать все дерьмо
+
+        $notification = Notification::firstOrCreate([
+            'text' => trans('notification.text.import-workers'),
+            'type_id' => NotificationTypeHelper::getIdByCodename(NotificationTypeHelper::PERSONAL),
+        ]);
+        auth()->user->notifications()->attach($notification->id);
     }
 }

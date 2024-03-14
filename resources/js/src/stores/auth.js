@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { i18n } from '@/boot/i18n'
 import { router } from '@inertiajs/vue3'
 import { ref } from 'vue'
 import AUTH from '@/utils/consts/auth'
@@ -30,13 +31,13 @@ export const useAuthStore = defineStore('auth', {
       return router.post(
         ROUTES.AUTH.BY_EMAIL_FORM,
         {
-          phoneFormatted: this.phoneFormatted,
+          email: this.email,
         },
         {
           onSuccess: (response) => {
-            this.phoneFormatted = response.props.phoneFormatted
+            this.email = response.props.email
             this.emailCode = response.props.emailCode
-            notify.success('Смс-код для авторизации ' + this.emailCode.code)
+            notify.success(i18n.global.t('message.codeForAuthorization', this.emailCode.code))
 
             // костыль
             this.clearEmailCodeTimeout()

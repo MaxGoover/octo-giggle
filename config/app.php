@@ -11,15 +11,19 @@ return [
     'cipher' => 'AES-256-CBC',
     'debug' => (bool) env('APP_DEBUG', false),
     'env' => env('APP_ENV', 'production'),
-    'faker_locale' => 'en_US',
-    'fallback_locale' => 'en',
+    'faker_locale' => 'ru_RU',
+    'fallback_locale' => 'ru',
     'key' => env('APP_KEY'),
-    'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'ru'),
     'maintenance' => [
         'driver' => 'file',
         // 'store' => 'redis',
     ],
     'name' => env('APP_NAME', 'Laravel'),
+    /**
+     * Поставщики услуг несут ответственность за загрузку базы данных, очереди,
+     * маршрутизации, компонентов проверки и тд.
+     */
     'providers' => ServiceProvider::defaultProviders()->merge([
         /* Package Service Providers... */
         /* Application Service Providers... */

@@ -62,7 +62,6 @@ const authStore = useAuthStore()
 
 const AUTH = inject('AUTH')
 const CONFIG = inject('CONFIG')
-const VALIDATION = inject('VALIDATION')
 
 onMounted(() => {
   authStore.setAuthType(AUTH.TYPE.BY_EMAIL)

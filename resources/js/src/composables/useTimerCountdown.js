@@ -99,15 +99,17 @@ export default function useTimerCountdown(durationValue) {
    */
   watch(isTimeUp, (newValue) => {
     if (newValue) {
-      //   clearDuration()
       stop()
     }
   })
 
+  /**
+   * Запускает таймер при его создании
+   * @returns {void}
+   */
   watch(
     duration,
     async () => {
-      console.log('duration', duration)
       reset()
       start()
     },

@@ -10,4 +10,9 @@ final class ProductCategoryHelper
 
     const CODENAME = 'codename';
     const NAME = 'name';
+
+    const LIST_FIELDS = [
+        self::CODENAME,
+        self::NAME,
+    ];
 }

@@ -6,53 +6,52 @@ namespace App\Adapters\Http\Actions\Auth\ByEmail;
 
 use App\Adapters\Http\Actions\Controller;
 use App\Adapters\Providers\RouteServiceProvider;
-use App\Adapters\Http\Requests\Auth\SignInByEmailRequest;
+use App\Adapters\Http\Requests\Auth\ByEmail\SignInByEmailRequest;
+use App\Entities\User\User;
 use App\UseCases\Auth\FindAuthEmailCodeByUserIdQuery;
-use App\UseCases\User\FindUserByPhoneQuery;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\RedirectResponse;
 
 final class AuthByEmailConfirmAction extends Controller
 {
-    public function __invoke(SignInByEmailRequest $request)
+    public function __invoke(SignInByEmailRequest $request): RedirectResponse
     {
+        // TODO: вынести в middleware
         if ($request->isTooManyAttempts()) {
-            return Redirect::back()->withErrors([
+            return redirect()->back()->withErrors([
                 'too_many_attempts' => 'Исчерпан лимит попыток авторизации. Попробуйте позднее',
             ]);
         }
 
-        $phone = clear_phone(Request::get('phoneFormatted'));
-        $user = FindUserByPhoneQuery::handle($phone);
+        $phone = clear_phone($request->input('phoneFormatted'));
+        $user = User::findByPhone($phone);
         if (is_null($user)) {
-            return Redirect::back()->withErrors([
+            return redirect()->back()->withErrors([
                 'not_exists_user_with_such_phone' => 'Не существует пользователя с таким номером телефона'
             ]);
         }
 
         $authSendEmailCode = FindAuthEmailCodeByUserIdQuery::handle($user->id);
         if (is_null($authSendEmailCode)) {
-            return Redirect::back()->withErrors([
-                'not_exists_valid_auth_email_code_for_user' => 'Отсутствует валидный смс-код для пользователя с таким номером телефона'
+            return redirect()->back()->withErrors([
+                'not_exists_valid_auth_email_code_for_user' => 'Отсутствует валидный код для пользователя с таким email'
             ]);
         }
 
-        if ($authSendEmailCode->id !== Request::get('emailCode')['id']) {
-            return Redirect::back()->withErrors([
-                'wrong_auth_email_code_id' => 'Неверный идентификатор смс-кода',
+        if ($authSendEmailCode->id !== $request->input('emailCode')['id']) {
+            return redirect()->back()->withErrors([
+                'wrong_auth_email_code_id' => 'Неверный идентификатор кода подтверждения',
             ]);
         }
 
-        if ($authSendEmailCode->code !== Request::get('emailCode')['code']) {
-            return Redirect::back()->withErrors([
-                'wrong_auth_email_code' => 'Неверный смс-код'
+        if ($authSendEmailCode->code !== $request->input('emailCode')['code']) {
+            return redirect()->back()->withErrors([
+                'wrong_auth_email_code' => 'Неверный код подтверждения'
             ]);
         }
 
         $request->clearThrottleKey();
-        $user->refreshToken();
         $request->session()->regenerate();
 
-        return Redirect::intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

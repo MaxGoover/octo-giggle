@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Validator;
 final class ProductCsvParser implements CsvParserInterface
 {
     private int    $_countExaminedLines = 0;
-    private string $_pathFile;
     private bool   $_isProductAdded = false;
+    private string $_pathFile;
     private array  $_products = [];
 
     public function __construct(string $pathFile)
@@ -68,7 +68,7 @@ final class ProductCsvParser implements CsvParserInterface
 
     private function _isProductValidated(array $product): bool
     {
-        $validator = Validator::make($product, config('validation.product'));
+        $validator = Validator::make($product, config('validation.rules.product'));
         return !$validator->fails();
     }
 }

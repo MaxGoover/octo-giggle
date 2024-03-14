@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UseCases\User;
 
-use App\Entities\User;
+use App\Entities\User\User;
 use Illuminate\Support\Facades\Hash;
 
 final class CreateUserCommand
@@ -13,7 +13,7 @@ final class CreateUserCommand
     {
         return User::create([
             'password' => Hash::make($password),
-            'phone' => $phone,
+            'phone'    => $phone,
         ]);
     }
 }

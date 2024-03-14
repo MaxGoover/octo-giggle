@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\UseCases\Auth;
 
-use App\Entities\AuthEmailCode;
+use App\Entities\Auth\AuthEmailCode;
+use App\Entities\Auth\AuthEmailCodeRepository;
 
 final class CreateAuthEmailCodeCommand
 {
     public static function handle(int $userId): AuthEmailCode
     {
-        AuthEmailCode::deactivateAllByUserId($userId);
+        AuthEmailCodeRepository::deactivateAllByUserId($userId);
 
-        return AuthEmailCode::create([
-            'code' => AuthEmailCode::generateNumber(),
-            'user_id' => $userId,
-        ]);
+        return AuthEmailCodeRepository::create($userId);
     }
 }

@@ -13,4 +13,12 @@ final class ProductHelper
     const CATEGORY_ID = 'category_id';
     const DESCRIPTION = 'description';
     const NAME = 'name';
+
+    const LIST_FIELDS = [
+        self::AMOUNT,
+        self::ARTICLE,
+        self::CATEGORY_ID,
+        self::DESCRIPTION,
+        self::NAME,
+    ];
 }

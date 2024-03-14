@@ -74,6 +74,9 @@ export default {
       wildberries: 'Загрузка цен WILDBERRIES',
     },
   },
+  message: {
+    codeForAuthorization: 'Код для авторизации: {authCode}',
+  },
   plural: {
     customers: {
       one: 'Заказчик',
