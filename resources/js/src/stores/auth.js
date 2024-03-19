@@ -37,7 +37,10 @@ export const useAuthStore = defineStore('auth', {
           onSuccess: (response) => {
             this.email = response.props.email
             this.emailCode = response.props.emailCode
-            notify.success(i18n.global.t('message.codeForAuthorization', this.emailCode.code))
+            console.log('this.emailCode', this.emailCode)
+            notify.success(
+              i18n.global.t('message.codeForAuthorization', { authCode: this.emailCode.code }),
+            )
 
             // костыль
             this.clearEmailCodeTimeout()
@@ -56,8 +59,8 @@ export const useAuthStore = defineStore('auth', {
       return router.post(
         ROUTES.AUTH.BY_EMAIL_CONFIRM,
         {
+          email: this.email,
           emailCode: this.emailCode,
-          phoneFormatted: this.phoneFormatted,
         },
         {
           onSuccess: (response) => {},

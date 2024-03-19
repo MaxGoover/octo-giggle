@@ -1,8 +1,10 @@
+import './bootstrap'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { i18n } from '@/boot/i18n'
 import { Notify, Quasar } from 'quasar'
 import { readonly } from 'vue'
+// import Echo from 'laravel-echo'
 
 // Import Pinia
 import { createPinia } from 'pinia'
@@ -22,11 +24,6 @@ import ICONS from '@/utils/consts/icons'
 import LEFT_DRAWER_MENU from '@/utils/consts/leftDrawerMenu'
 import ROUTES from '@/utils/consts/routes'
 import VALIDATION from '@/utils/settings/validation'
-
-// // Import axios
-// import axios from 'axios'
-// window.axios = axios
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 createInertiaApp({
   resolve: (name) => {
@@ -49,5 +46,8 @@ createInertiaApp({
       .use(i18n)
       .use(pinia)
     app.mount(el)
+    // Echo.privateChannel('notification').listen('ProductUploadFile', (e) => {
+    //   alert('abc')
+    // })
   },
 })

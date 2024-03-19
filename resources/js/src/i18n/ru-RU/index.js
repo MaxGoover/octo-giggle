@@ -35,8 +35,8 @@ export default {
     },
     mightRepeatAfter: 'Повторить можно через {timerMinutes}:{timerSeconds}',
     satisfied: 'довольных',
+    sendCodeAgain: 'Выслать код повторно',
     sentEmailCode: 'На указанную Вами почту {email} отправлено сообщение с кодом',
-    sendEmailCodeAgain: 'Выслать код повторно',
     title: 'Вход в систему',
   },
   column: {

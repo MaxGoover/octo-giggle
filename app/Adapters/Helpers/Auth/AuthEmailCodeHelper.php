@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Adapters\Helpers\Notification;
+namespace App\Adapters\Helpers\Auth;
 
 final class AuthEmailCodeHelper
 {
-    const TABLE_NAME = 'auth_email_code';
+    const TABLE_NAME = 'auth_email_codes';
 
     const ACTIVE = 'active';
     const CODE = 'code';

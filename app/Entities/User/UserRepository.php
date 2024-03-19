@@ -10,7 +10,9 @@ final class UserRepository
 {
     public static function findByEmail(string $email): ?User
     {
-        return User::firstWhere(UserHelper::EMAIL, $email);
+        return User::where(UserHelper::EMAIL, $email)
+            ->whereNotNull(UserHelper::EMAIL_VERIFIED_AT)
+            ->first();
     }
 
     public static function findById(int $id): ?User

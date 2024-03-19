@@ -1,5 +1,6 @@
 <?php
 
+use App\Adapters\Events\ProductUploadFile;
 use App\Adapters\Http\Actions\Auth\AuthSignOutAction;
 use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailAction;
 use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailConfirmAction;
@@ -60,3 +61,10 @@ Route::get('/unit-economic/conditions-promotion-wb', [UnitEconomicWbAction::clas
 
 Route::get('/products/get-product-categories', [GetProductCategoriesAxios::class])->middleware('auth');
 Route::post('/products/upload-products-file', [UploadProductsAxios::class, 'handle'])->middleware('auth');
+
+Route::get('/test', function () {
+    event(new ProductUploadFile('From route'));
+    return inertia('desktop/views/DesktopPageDashboard');
+})
+    ->name('home')
+    ->middleware('auth');

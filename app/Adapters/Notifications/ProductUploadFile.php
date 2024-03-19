@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace App\Adapters\Notifications;
 
+use App\Adapters\Helpers\Notification\NotificationHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\DatabaseMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProductUploadFile extends Notification
+class ProductUploadFile extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct()
+    private string $_text;
+    private int $_typeId;
+
+    public function __construct(string $text, int $typeId)
     {
-        //
+        $this->_text = $text;
+        $this->_typeId = $typeId;
     }
 
     /**
@@ -28,29 +31,14 @@ class ProductUploadFile extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
-    public function toMail(object $notifiable): MailMessage
+    public function toDatabase(object $notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
+        return new DatabaseMessage([
+            NotificationHelper::TEXT    => $this->_text,
+            NotificationHelper::TYPE_ID => $this->_typeId,
+        ]);
     }
 }

@@ -13,8 +13,10 @@ final class UploadProductsAxios
 {
     public function handle(UploadProductsRequest $request): JsonResponse
     {
+
+        $fileName = $request->file('file')->getClientOriginalName();
         $filePath = ProductCsvStorage::storeFile($request->file('file'));
-        ParseProductsCsvFileJob::dispatch($filePath)->onQueue('default');
+        ParseProductsCsvFileJob::dispatch(auth()->user(), $fileName, $filePath)->onQueue('default');
 
         return response()->json(['message' => 'norm'], 200);
     }

@@ -15,16 +15,7 @@ final class AuthByEmailFormAction extends Controller
 {
     public function __invoke(SendAuthEmailCodeRequest $request)
     {
-        // TODO: Проверить негативный сценарий
-        $abc = $request->validate(['email' => config('validation.rules.auth.email')]);
-        dd($abc);
-        return redirect()->back()->withErrors([
-            'abc' => $abc,
-        ]);
-
-        $email = $request->input('email');
-
-        $user = UserRepository::findByEmail($email);
+        $user = UserRepository::findByEmail($request->input('email'));
         if (is_null($user)) {
             return redirect()->back()->withErrors([
                 'find_user_by_email' => 'Пользователя с таким email не существует'
@@ -37,10 +28,11 @@ final class AuthByEmailFormAction extends Controller
         }
 
         return inertia('desktop/views/auth/byEmail/DesktopPageAuthByEmailConfirm', [
+            'email' => $user->email,
             'emailCode' => [
                 'id' => $authSendEmailCode->id,
                 'code' => $authSendEmailCode->code,
-                'timeout' => $authSendEmailCode->timeout(),
+                'timeout' => $authSendEmailCode->timeout,
             ],
         ]);
     }

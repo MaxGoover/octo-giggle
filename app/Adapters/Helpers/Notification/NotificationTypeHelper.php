@@ -28,6 +28,7 @@ final class NotificationTypeHelper
 
     public static function getIdByCodename(string $codename): ?int
     {
-        return NotificationType::where(self::CODENAME, $codename)->pluck('id');
+        $notification = NotificationType::firstWhere(self::CODENAME, $codename);
+        return $notification->id;
     }
 }

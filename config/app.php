@@ -29,7 +29,7 @@ return [
         /* Application Service Providers... */
         App\Adapters\Providers\AppServiceProvider::class,
         App\Adapters\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Adapters\Providers\BroadcastServiceProvider::class,
         App\Adapters\Providers\EventServiceProvider::class,
         App\Adapters\Providers\RouteServiceProvider::class,
     ])->toArray(),

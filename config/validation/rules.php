@@ -7,7 +7,8 @@ return [
         'email' => 'required|string|email',
         'email_code' => [
             'id' => 'required|integer',
-            'code' => 'required|integer|min:' . config('auth.email_code.number.min') . '|max:' . config('auth.email_code.number.max'),
+            // 'code' => 'required|integer|min:' . config('auth.email_code.number.min') . '|max:' . config('auth.email_code.number.max'),
+            'code' => 'required|integer',
         ],
         'password' => 'required|string|min:' . config('auth.password.length.min') . '|max:' . config('auth.password.length.max'),
     ],

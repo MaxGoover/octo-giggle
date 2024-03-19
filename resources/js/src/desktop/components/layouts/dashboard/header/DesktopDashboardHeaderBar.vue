@@ -49,12 +49,16 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, onMounted } from 'vue'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import DesktopDashboardHeaderAccount from '@/desktop/components/layouts/dashboard/header/DesktopDashboardHeaderAccount.vue'
 import IconLogo2 from '@/assets/icons/IconLogo2.vue'
 
 const ICONS = inject('ICONS')
+
+// onMounted(() => {
+//   this.echo.privateChannel
+// })
 </script>
 
 <style lang="sass" scoped>

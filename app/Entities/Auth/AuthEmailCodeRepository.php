@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entities\Auth;
 
-use App\Adapters\Helpers\Notification\AuthEmailCodeHelper;
+use App\Adapters\Helpers\Auth\AuthEmailCodeHelper;
 
 final class AuthEmailCodeRepository
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entities\Auth;
 
-use App\Adapters\Helpers\Notification\AuthEmailCodeHelper;
+use App\Adapters\Helpers\Auth\AuthEmailCodeHelper;
 use App\Entities\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -58,6 +58,11 @@ class AuthEmailCode extends Model
     }
 
     /** Accessors/Mutators */
+    public function getTimeoutAttribute(): int
+    {
+        $created_at = Carbon::parse($this->created_at);
+        return config('settings.auth.email_code.timeout') - $created_at->diffInSeconds(Carbon::now());
+    }
 
     /** Logic */
     // TODO: Вынести в аксессор
@@ -66,12 +71,5 @@ class AuthEmailCode extends Model
         $dateExpiration = Carbon::parse($this->created_at)
             ->addSeconds(config('settings.auth.email_code.timeout'));
         return $dateExpiration < Carbon::now();
-    }
-
-    // TODO: Вынести в аксессор
-    public function timeout(): int
-    {
-        $created_at = Carbon::parse($this->created_at);
-        return config('settings.auth.email_code.timeout') - $created_at->diffInSeconds(Carbon::now());
     }
 }

@@ -4,7 +4,7 @@ return [
     'auth' => [
         'email_code' => [
             'expires' => 3600, // (сек)
-            'timeout' => 5, // (сек)
+            'timeout' => 30, // (сек)
         ],
     ],
     'product' => [

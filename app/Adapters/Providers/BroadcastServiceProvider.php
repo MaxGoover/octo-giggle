@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Adapters\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
@@ -14,6 +14,6 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         Broadcast::routes();
 
-        require base_path('routes/channels.php');
+        require base_path('app/Adapters/Http/Routes/channels.php');
     }
 }
