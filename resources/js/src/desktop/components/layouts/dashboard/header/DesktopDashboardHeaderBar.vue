@@ -9,10 +9,10 @@
       <q-item class="q-pr-sm font-size-12">
         <q-item-section>
           <q-item-label>
-            <span class="text-grey-9">{{ $t('topToolbar.paymentBalance') }}:</span>
+            <span class="text-grey-9">{{ $t('topToolBar.paymentBalance') }}:</span>
           </q-item-label>
           <q-item-label>
-            <span class="text-grey-6">{{ $t('topToolbar.commissionBalance') }}:</span>
+            <span class="text-grey-6">{{ $t('topToolBar.commissionBalance') }}:</span>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -32,15 +32,13 @@
       <!--Пополнить баланс-->
       <q-btn class="rounded-button action-button--secondary ml-32">
         <q-icon color="indigo-8" name="mdi-plus-circle" size="28px" />
-        <span class="q-ml-sm">{{ $t('topToolbar.replenishBalance') }}</span>
+        <span class="q-ml-sm">{{ $t('topToolBar.replenishBalance') }}</span>
       </q-btn>
 
       <q-space />
 
       <!--Уведомления-->
-      <q-btn flat round icon="mdi-bell-outline">
-        <!-- <q-badge color="red" floating rounded /> -->
-      </q-btn>
+      <DesktopDashboardHeaderNotifications />
 
       <!--Аккаунт-->
       <DesktopDashboardHeaderAccount class="q-ml-md" />
@@ -52,13 +50,10 @@
 import { inject, onMounted } from 'vue'
 import ComponentIcon from '@/components/ComponentIcon.vue'
 import DesktopDashboardHeaderAccount from '@/desktop/components/layouts/dashboard/header/DesktopDashboardHeaderAccount.vue'
+import DesktopDashboardHeaderNotifications from '@/desktop/components/layouts/dashboard/header/DesktopDashboardHeaderNotifications.vue';
 import IconLogo2 from '@/assets/icons/IconLogo2.vue'
 
 const ICONS = inject('ICONS')
-
-// onMounted(() => {
-//   this.echo.privateChannel
-// })
 </script>
 
 <style lang="sass" scoped>

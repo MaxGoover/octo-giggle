@@ -1,20 +1,20 @@
 <template>
-  <div class="account" :title="$t('account.menu.profile')">
+  <div class="account" :title="$t('topToolBar.profile')">
     <q-item class="q-px-sm rounded-borders" clickable v-ripple>
       <q-item-section>
         <q-item-label>
           <span class="account__text account__text--primary">{{
-            page.props.currentUser.name
+            $page.props.currentUser.name
           }}</span>
         </q-item-label>
         <q-item-label>
           <span class="account__text account__text--secondary">
-            {{ page.props.currentUser.phoneFormatted }}
+            {{ $page.props.currentUser.phoneFormatted }}
           </span>
         </q-item-label>
       </q-item-section>
       <q-item-section side>
-        <q-avatar class="avatar">{{ page.props.currentUser.nameInitials }}</q-avatar>
+        <q-avatar class="avatar">{{ $page.props.currentUser.nameInitials }}</q-avatar>
       </q-item-section>
     </q-item>
 
@@ -22,17 +22,17 @@
       <q-list>
         <!--Аватар-->
         <div class="column items-center">
-          <q-avatar class="q-mt-lg avatar">{{ page.props.currentUser.nameInitials }}</q-avatar>
+          <q-avatar class="q-mt-lg avatar">{{ $page.props.currentUser.nameInitials }}</q-avatar>
           <q-item class="q-mt-sm q-pa-none">
             <q-item-section>
               <q-item-label class="text-center">
                 <span class="account__text account__text--primary">{{
-                  page.props.currentUser.name
+                  $page.props.currentUser.name
                 }}</span>
               </q-item-label>
               <q-item-label class="text-center">
                 <span class="account__text account__text--secondary">
-                  {{ page.props.currentUser.phoneFormatted }}
+                  {{ $page.props.currentUser.phoneFormatted }}
                 </span>
               </q-item-label>
             </q-item-section>
@@ -83,10 +83,8 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { usePage } from '@inertiajs/vue3'
 
 const authStore = useAuthStore()
-const page = usePage()
 </script>
 
 <style lang="sass" scoped>

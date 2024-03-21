@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entities\User;
 
-use App\Adapters\Helpers\Notification\NotificationUserHelper;
 use App\Adapters\Helpers\User\UserHelper;
 use App\Entities\Auth\AuthEmailCode;
-use App\Entities\Notification\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -75,14 +73,6 @@ class User extends Authenticatable
     final function authEmailCodes()
     {
         return $this->hasMany(AuthEmailCode::class);
-    }
-
-    final function notifications()
-    {
-        return $this
-            ->belongsToMany(Notification::class)
-            ->withTimestamps()
-            ->withPivot([NotificationUserHelper::IS_RED, 'created_at']);
     }
 
     /** Scopes */

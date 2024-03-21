@@ -49,6 +49,7 @@ class HandleInertiaRequests extends Middleware
                         'owner' => $request->user()->owner,
                     ];
                 },
+                'countUnreadNotifications' => $request->user()->unreadNotifications()->count(),
             ]);
         }
 

@@ -7,6 +7,11 @@ return [
             'timeout' => 30, // (сек)
         ],
     ],
+    'notification' => [
+        'pagination' => [
+            'rowsPerPage' => 10,
+        ],
+    ],
     'product' => [
         'csvStorage' => [
             'url' => [

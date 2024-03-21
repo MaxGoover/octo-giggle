@@ -99,9 +99,11 @@ export default {
     paginationInfo: '{endRowIndex} из {totalRowsNumber}',
     rowsPerPage: 'На странице',
   },
-  topToolbar: {
+  topToolBar: {
     commissionBalance: 'Баланс комиссии',
+    notifications: 'Уведомления',
     paymentBalance: 'Баланс для оплаты',
+    profile: 'Профиль',
     replenishBalance: 'Пополнить баланс',
   },
   title: {

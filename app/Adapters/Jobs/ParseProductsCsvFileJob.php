@@ -2,13 +2,10 @@
 
 namespace App\Adapters\Jobs;
 
-use App\Adapters\Helpers\Notification\NotificationTypeHelper;
-use App\Adapters\Events\ProductUploadFile;
 use App\Adapters\Services\Product\Csv\ProductCsvParser;
 use App\Adapters\Services\Product\Csv\ProductCsvStorage;
 use App\Adapters\Services\Product\ProductStorage;
-use App\Entities\Notification\Notification;
-use App\Entities\Notification\NotificationRepository;
+use App\Adapters\Notifications\UploadFileProductsNotification;
 use App\Entities\User\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -48,13 +45,8 @@ class ParseProductsCsvFileJob implements ShouldQueue
         ProductCsvStorage::clearFile($this->_filePath);
         $products = $productCsvParser->getProducts();
         $this->_productStorage->createOrUpdate($products);
-        $notification = NotificationRepository::create(
-            __('notification.product.uploadFile.success'),
-            NotificationTypeHelper::getIdByCodename(NotificationTypeHelper::PERSONAL),
-        );
-        $this->_user->notifications()->attach($notification);
-        event(new ProductUploadFile('From job'));
-        // event(new ProductUploadFile($notification->text));
-        // $this->_user->notify(new ProductUploadFile($notification->text, $notification->type_id));
+        $this->_user->notify(new UploadFileProductsNotification(
+            __('notification.product.uploadFile.success', ['fileName' => $this->_fileName]),
+        ));
     }
 }

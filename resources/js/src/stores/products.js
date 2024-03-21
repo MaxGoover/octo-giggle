@@ -16,7 +16,6 @@ export const useProductsStore = defineStore('products', {
         .get('/products/get-product-categories')
         .then((response) => {
           this.setProductCategories(response.data.productCategories)
-          console.log(this.productCategories)
         })
         .catch(() => {
           notify.error('Не удалось получить список категорий товаров')

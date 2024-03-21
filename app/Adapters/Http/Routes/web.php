@@ -1,6 +1,6 @@
 <?php
 
-use App\Adapters\Events\ProductUploadFile;
+use App\Adapters\Events\UploadFileProductsNotification;
 use App\Adapters\Http\Actions\Auth\AuthSignOutAction;
 use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailAction;
 use App\Adapters\Http\Actions\Auth\ByEmail\AuthByEmailConfirmAction;
@@ -9,6 +9,7 @@ use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneAction;
 use App\Adapters\Http\Actions\Auth\ByPhone\AuthByPhoneConfirmAction;
 use App\Adapters\Http\Actions\Dashboard\DashboardAction;
 use App\Adapters\Http\Actions\UnitEconomic\UnitEconomicWbAction;
+use App\Adapters\Http\Axios\Notifications\GetNotificationsAxios;
 use App\Adapters\Http\Axios\Products\GetProductCategoriesAxios;
 use App\Adapters\Http\Axios\Products\UploadProductsAxios;
 use Illuminate\Support\Facades\Route;
@@ -59,12 +60,7 @@ Route::get('/unit-economic/wb', [UnitEconomicWbAction::class, 'handle'])->middle
 Route::get('/unit-economic/ozon', [UnitEconomicWbAction::class, 'handle'])->middleware('auth');
 Route::get('/unit-economic/conditions-promotion-wb', [UnitEconomicWbAction::class, 'handle'])->middleware('auth');
 
+// axios
 Route::get('/products/get-product-categories', [GetProductCategoriesAxios::class])->middleware('auth');
 Route::post('/products/upload-products-file', [UploadProductsAxios::class, 'handle'])->middleware('auth');
-
-Route::get('/test', function () {
-    event(new ProductUploadFile('From route'));
-    return inertia('desktop/views/DesktopPageDashboard');
-})
-    ->name('home')
-    ->middleware('auth');
+Route::get('/dashboard/get-notifications', [GetNotificationsAxios::class, 'handle'])->middleware('auth');

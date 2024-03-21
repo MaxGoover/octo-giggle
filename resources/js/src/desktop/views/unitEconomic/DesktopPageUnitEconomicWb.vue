@@ -44,11 +44,11 @@
             </template>
             <template v-slot:append>
               <q-btn
-                v-if="productsStore.productsFile"
                 color="grey-1"
                 dense
                 flat
-                icon="mdi-plus"
+                icon="mdi-file-send-outline"
+                :disabled="!productsStore.productsFile"
                 :title="$t('action.sendFile')"
                 @click="productsStore.uploadProductsFile($refs.productsFile.modelValue)"
               />

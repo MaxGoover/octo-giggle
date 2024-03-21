@@ -22,6 +22,7 @@ import AUTH from '@/utils/consts/auth'
 import CONFIG from '@/utils/settings/config'
 import ICONS from '@/utils/consts/icons'
 import LEFT_DRAWER_MENU from '@/utils/consts/leftDrawerMenu'
+import NOTIFICATION_TYPES from '@/utils/consts/notificationTypes'
 import ROUTES from '@/utils/consts/routes'
 import VALIDATION from '@/utils/settings/validation'
 
@@ -36,6 +37,7 @@ createInertiaApp({
       .provide('CONFIG', readonly(CONFIG))
       .provide('ICONS', readonly(ICONS))
       .provide('LEFT_DRAWER_MENU', readonly(LEFT_DRAWER_MENU))
+      .provide('NOTIFICATION_TYPES', readonly(NOTIFICATION_TYPES))
       .provide('ROUTES', readonly(ROUTES))
       .provide('VALIDATION', readonly(VALIDATION))
       .use(plugin)
@@ -46,7 +48,7 @@ createInertiaApp({
       .use(i18n)
       .use(pinia)
     app.mount(el)
-    // Echo.privateChannel('notification').listen('ProductUploadFile', (e) => {
+    // Echo.privateChannel('notification').listen('UploadFileProductsNotification', (e) => {
     //   alert('abc')
     // })
   },

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 final class AuthSignOutAction extends Controller
 {
-    public function handle(Request $request)
+    public function __handle(Request $request)
     {
         auth()->guard('web')->logout();
         $request->session()->invalidate();

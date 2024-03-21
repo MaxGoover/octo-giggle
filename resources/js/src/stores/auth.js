@@ -37,12 +37,9 @@ export const useAuthStore = defineStore('auth', {
           onSuccess: (response) => {
             this.email = response.props.email
             this.emailCode = response.props.emailCode
-            console.log('this.emailCode', this.emailCode)
             notify.success(
               i18n.global.t('message.codeForAuthorization', { authCode: this.emailCode.code }),
             )
-
-            // костыль
             this.clearEmailCodeTimeout()
             this.setEmailCodeTimeout(response.props.emailCode.timeout)
           },
